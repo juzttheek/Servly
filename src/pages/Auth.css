@@ -1,0 +1,311 @@
+/* ============================================
+   SERVLY — Auth Pages (Login & Register)
+   ============================================ */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Left Panel */
+.auth-left {
+  position: relative;
+  background: var(--gradient-hero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  overflow: hidden;
+}
+
+.auth-left-content {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-left-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.auth-left-text {
+  max-width: 400px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: var(--space-10);
+}
+
+.auth-logo-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--color-white);
+}
+
+.auth-logo span {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  color: var(--color-white);
+}
+
+.auth-left-text h2 {
+  color: var(--color-white);
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-4);
+}
+
+.auth-left-text p {
+  color: var(--color-muted-on-dark);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  margin-bottom: var(--space-8);
+}
+
+.auth-left-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-muted-on-dark);
+  font-size: var(--text-base);
+}
+
+.auth-feature-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-sky-blue);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* Right Panel */
+.auth-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  background: var(--color-white);
+  overflow-y: auto;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-form-header {
+  margin-bottom: var(--space-8);
+}
+
+.auth-form-header h1 {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  margin-bottom: var(--space-2);
+}
+
+.auth-form-header p {
+  color: var(--color-muted-blue-gray);
+  font-size: var(--text-base);
+}
+
+/* Error */
+.auth-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-lg);
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-6);
+}
+
+/* Role Select */
+.auth-role-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.auth-role-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-4);
+  background: var(--color-page-gray);
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-lg);
+  color: var(--color-body);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.auth-role-btn:hover {
+  border-color: var(--color-brand-blue);
+}
+
+.auth-role-btn.active {
+  background: rgba(35, 89, 200, 0.06);
+  border-color: var(--color-brand-blue);
+  color: var(--color-brand-blue);
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.auth-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.auth-form-extras {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-sm);
+  color: var(--color-body);
+  cursor: pointer;
+}
+
+.auth-checkbox input {
+  accent-color: var(--color-brand-blue);
+  width: 16px;
+  height: 16px;
+}
+
+.auth-link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-brand-blue);
+}
+
+.auth-link:hover {
+  color: var(--color-sky-blue);
+}
+
+/* Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-blue-gray);
+}
+
+.auth-divider span {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  white-space: nowrap;
+}
+
+/* Google Button */
+.auth-google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--color-white);
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--color-heading);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.auth-google-btn:hover {
+  border-color: var(--color-muted-blue-gray);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Switch */
+.auth-switch {
+  text-align: center;
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
+
+.auth-switch a {
+  font-weight: 700;
+  color: var(--color-brand-blue);
+}
+
+.auth-switch a:hover {
+  color: var(--color-sky-blue);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    display: none;
+  }
+
+  .auth-right {
+    padding: var(--space-6);
+    padding-top: calc(var(--navbar-height) + var(--space-6));
+  }
+
+  .auth-form-row {
+    grid-template-columns: 1fr;
+  }
+}

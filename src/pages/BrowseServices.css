@@ -1,0 +1,299 @@
+/* ============================================
+   SERVLY — Browse Services Styles
+   ============================================ */
+
+.browse-page {
+  padding-bottom: var(--space-16);
+}
+
+.browse-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-8);
+}
+
+.browse-header {
+  margin-bottom: var(--space-2);
+}
+
+.browse-header h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-2);
+}
+
+.browse-header p {
+  color: var(--color-muted-blue-gray);
+}
+
+/* Search Bar */
+.browse-search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.browse-search-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.browse-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--color-muted-blue-gray);
+}
+
+.browse-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 42px;
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-md);
+  background: var(--color-page-gray);
+  font-size: var(--text-base);
+  color: var(--color-heading);
+  transition: all var(--transition-fast);
+}
+
+.browse-search-input:focus {
+  border-color: var(--color-brand-blue);
+  background: var(--color-white);
+}
+
+.browse-search-clear {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--color-muted-blue-gray);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.browse-select {
+  padding: 10px 32px 10px 14px;
+  background: var(--color-page-gray);
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--color-heading);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7A99' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6l3.5 3.5L11.5 6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: all var(--transition-fast);
+  min-width: 140px;
+}
+
+.browse-select:focus {
+  border-color: var(--color-brand-blue);
+  background-color: var(--color-white);
+}
+
+.browse-view-toggle {
+  display: flex;
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.browse-view-btn {
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  color: var(--color-muted-blue-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.browse-view-btn.active {
+  background: var(--color-brand-blue);
+  color: var(--color-white);
+}
+
+.browse-view-btn:not(.active):hover {
+  background: var(--color-page-gray);
+}
+
+/* Active Filters */
+.browse-active-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.browse-filter-count {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-heading);
+}
+
+.browse-active-filters .badge button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  margin-left: 4px;
+  color: inherit;
+}
+
+.browse-clear-all {
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-error);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Service Grid */
+.browse-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.browse-list-view {
+  grid-template-columns: 1fr;
+}
+
+.service-card-link {
+  text-decoration: none;
+  display: block;
+}
+
+.service-card-banner {
+  height: 120px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-4);
+}
+
+.service-card-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.service-card-provider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.service-card-provider-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-body);
+}
+
+.service-card-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.3;
+}
+
+.service-card-desc {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.service-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-blue-gray);
+  margin-top: auto;
+}
+
+.service-card-price-location {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-card-price {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-base);
+  color: var(--color-brand-blue);
+}
+
+.service-card-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--color-muted-blue-gray);
+}
+
+/* Empty State */
+.browse-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-16) 0;
+  text-align: center;
+  color: var(--color-muted-blue-gray);
+}
+
+.browse-empty h3 {
+  font-size: var(--text-xl);
+  color: var(--color-heading);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .browse-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .browse-search-bar {
+    flex-wrap: wrap;
+  }
+
+  .browse-search-input-wrapper {
+    min-width: 100%;
+  }
+
+  .browse-select {
+    flex: 1;
+    min-width: calc(50% - var(--space-3));
+  }
+
+  .browse-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .browse-view-toggle {
+    display: none;
+  }
+}

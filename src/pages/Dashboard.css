@@ -1,0 +1,310 @@
+/* ============================================
+   SERVLY — Dashboard Styles
+   ============================================ */
+
+.dashboard-page {
+  padding-bottom: var(--space-16);
+}
+
+.dashboard-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-8);
+}
+
+/* Header */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.dash-welcome h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-2);
+}
+
+.dash-welcome p {
+  color: var(--color-muted-blue-gray);
+  font-size: var(--text-base);
+}
+
+/* Stats Grid */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.dash-stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dash-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-stat-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dash-stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-muted-blue-gray);
+  font-weight: 500;
+}
+
+.dash-stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-heading);
+}
+
+/* Quick Actions */
+.dash-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.dash-quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.dash-quick-action:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.dash-qa-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-quick-action span {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-heading);
+}
+
+/* Section */
+.dash-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.dash-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dash-section-header h3 {
+  font-size: var(--text-xl);
+}
+
+.dash-section-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-brand-blue);
+  text-decoration: none;
+}
+
+.dash-section-link:hover {
+  color: var(--color-sky-blue);
+}
+
+/* Bookings List */
+.dash-bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dash-booking-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+}
+
+.dash-booking-info {
+  flex: 1;
+}
+
+.dash-booking-info h4 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dash-booking-info p {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
+
+.dash-booking-price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+/* Requests List */
+.dash-requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dash-request-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dash-request-info {
+  flex: 1;
+}
+
+.dash-request-info h4 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dash-request-meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
+
+.dash-request-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dash-request-budget {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--color-brand-blue);
+  white-space: nowrap;
+}
+
+.dash-request-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* Recommendations */
+.dash-recommendations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.dash-rec-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dash-rec-card h4 {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.dash-rec-provider {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
+
+.dash-rec-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+}
+
+.dash-rec-price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-brand-blue);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dash-stats-grid,
+  .dash-quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dash-recommendations {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dash-stats-grid,
+  .dash-quick-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dash-booking-item {
+    flex-wrap: wrap;
+  }
+
+  .dash-request-item {
+    flex-wrap: wrap;
+  }
+
+  .dash-request-actions {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  .dash-recommendations {
+    grid-template-columns: 1fr;
+  }
+}

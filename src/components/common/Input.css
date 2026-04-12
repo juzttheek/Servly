@@ -1,0 +1,113 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-full {
+  width: 100%;
+}
+
+.input-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--color-muted-blue-gray);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transition: color var(--transition-fast);
+  z-index: 1;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--color-white);
+  border: 2px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-lg);
+  color: var(--color-heading);
+  font-size: var(--text-base);
+  transition: all var(--transition-base);
+}
+
+.input-field.has-icon {
+  padding-left: 44px;
+}
+
+.input-field.has-toggle {
+  padding-right: 44px;
+}
+
+.input-field::placeholder {
+  color: var(--color-muted-blue-gray);
+}
+
+.input-field:focus {
+  border-color: var(--color-brand-blue);
+  box-shadow: 0 0 0 4px rgba(35, 89, 200, 0.1);
+}
+
+.input-field:focus ~ .input-icon,
+.input-field:focus + .input-icon {
+  color: var(--color-brand-blue);
+}
+
+.input-group:focus-within .input-icon {
+  color: var(--color-brand-blue);
+}
+
+.input-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.input-toggle {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--color-muted-blue-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color var(--transition-fast);
+}
+
+.input-toggle:hover {
+  color: var(--color-brand-blue);
+}
+
+/* Error state */
+.input-error .input-field {
+  border-color: var(--color-error);
+}
+
+.input-error .input-field:focus {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.input-error-text {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.input-helper {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
