@@ -102,11 +102,7 @@ const Landing = () => {
           >
             <motion.div variants={fadeUp}>
               <Badge variant="dark" size="lg" dot>
-<<<<<<< HEAD
                 <Sparkles size={14} /> {t('landing.hero_badge')}
-=======
-                <Sparkles size={14} /> Sri Lanka's First All-in-One Service Platform
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
               </Badge>
             </motion.div>
 
@@ -117,12 +113,7 @@ const Landing = () => {
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={fadeUp}>
-<<<<<<< HEAD
               {t('landing.hero_subtitle')}
-=======
-              From home repairs to legal advice — everything on Servly.
-              Connect with verified professionals across {SERVICE_CATEGORIES.length} service categories.
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </motion.p>
 
             <motion.form className="hero-search" variants={fadeUp} onSubmit={handleSearch}>
@@ -140,13 +131,8 @@ const Landing = () => {
                 </Button>
               </div>
               <div className="hero-search-tags">
-<<<<<<< HEAD
                 <span className="hero-search-tags-label">{t('landing.popular')}</span>
                 {['Home Cleaning', 'Plumbing', 'Photography', 'Web Development'].map(tag => (
-=======
-                <span className="hero-search-tags-label">Popular:</span>
-                {['Home Services', 'Legal Advice', 'Quick Help', 'Web Development'].map(tag => (
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                   <Link
                     key={tag}
                     to={`/services?q=${encodeURIComponent(tag)}`}
@@ -202,13 +188,8 @@ const Landing = () => {
               <div className="hero-floating-card hero-fc-3">
                 <div className="hero-fc-icon hero-fc-icon-red"><AlertTriangle size={20} /></div>
                 <div>
-<<<<<<< HEAD
                   <p className="hero-fc-title">{t('landing.avg_rating')}</p>
                   <p className="hero-fc-desc">{t('landing.reviews')}</p>
-=======
-                  <p className="hero-fc-title">Quick Help 🔥</p>
-                  <p className="hero-fc-desc">On-demand services</p>
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                 </div>
               </div>
 
@@ -216,13 +197,8 @@ const Landing = () => {
                 <div className="hero-visual-gradient" />
                 <div className="hero-visual-content">
                   <HeartHandshake size={64} strokeWidth={1.5} />
-<<<<<<< HEAD
                   <h3>{t('landing.smart_marketplace')}</h3>
                   <p>{t('landing.connecting_people')}</p>
-=======
-                  <h3>All-in-One<br/>Service Platform</h3>
-                  <p>{SERVICE_CATEGORIES.length} Categories<br/>One Platform</p>
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                 </div>
               </div>
             </div>
@@ -263,11 +239,7 @@ const Landing = () => {
             <Badge variant="primary" size="lg">{t('landing.categories_badge')}</Badge>
             <h2>{t('landing.categories_title')}</h2>
             <p className="section-desc">
-<<<<<<< HEAD
               {t('landing.categories_desc')}
-=======
-              From home repairs to legal advice — find the right professional for any task across {SERVICE_CATEGORIES.length} service categories.
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </p>
           </motion.div>
 
@@ -290,23 +262,9 @@ const Landing = () => {
                     <div className="category-icon" style={{ background: `${cat.color}12`, color: cat.color }}>
                       <IconComponent size={26} />
                     </div>
-<<<<<<< HEAD
                     <h4 className="category-name">{t(`landing.category_${transKey}_name`)}</h4>
                     <p className="category-desc">{t(`landing.category_${transKey}_desc`)}</p>
                     <span className="category-count">{cat.count} {t('landing.providers_count')}</span>
-=======
-                    <h4 className="category-name">{cat.emoji} {cat.name}</h4>
-                    <p className="category-desc">{cat.description}</p>
-                    <div className="category-subcategories">
-                      {cat.subcategories.slice(0, 3).map(sub => (
-                        <span key={sub.id} className="category-sub-tag">{sub.name}</span>
-                      ))}
-                      {cat.subcategories.length > 3 && (
-                        <span className="category-sub-more">+{cat.subcategories.length - 3} more</span>
-                      )}
-                    </div>
-                    <span className="category-count">{cat.count} providers</span>
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                     <div className="category-arrow"><ChevronRight size={18} /></div>
                   </Link>
                 </motion.div>
@@ -392,11 +350,7 @@ const Landing = () => {
                 {t('landing.why_title')}
               </motion.h2>
               <motion.p className="why-desc" variants={fadeUp}>
-<<<<<<< HEAD
                 {t('landing.why_desc')}
-=======
-                We combine technology with human expertise to give you the best experience in finding and booking services across all {SERVICE_CATEGORIES.length} categories.
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
               </motion.p>
 
               <div className="why-features">
@@ -528,12 +482,7 @@ const Landing = () => {
               {t('landing.cta_title')}
             </motion.h2>
             <motion.p variants={fadeUp}>
-<<<<<<< HEAD
               {t('landing.cta_desc')}
-=======
-              Join thousands of customers and service providers on Sri Lanka's first all-in-one service platform.
-              From home repairs to legal advice — everything on Servly.
->>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </motion.p>
             <motion.div className="cta-buttons" variants={fadeUp}>
               <Link to="/register">
