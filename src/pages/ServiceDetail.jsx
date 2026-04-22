@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, Shield, Star, MessageSquare, Calendar, CheckCircle, ChevronRight, Share2, Heart, Flag } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import Avatar from '../components/common/Avatar';
 import Badge from '../components/common/Badge';
@@ -10,6 +11,7 @@ import { useAuth } from '../context/AuthContext';
 import './ServiceDetail.css';
 
 const ServiceDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
@@ -58,9 +60,9 @@ We are committed to delivering exceptional cleaning services that exceed your ex
       <div className="container">
         {/* Breadcrumb */}
         <div className="detail-breadcrumb">
-          <Link to="/">Home</Link>
+          <Link to="/">{t('service_detail.breadcrumb_home')}</Link>
           <ChevronRight size={14} />
-          <Link to="/services">Services</Link>
+          <Link to="/services">{t('service_detail.breadcrumb_services')}</Link>
           <ChevronRight size={14} />
           <span>{service.title}</span>
         </div>
@@ -77,14 +79,14 @@ We are committed to delivering exceptional cleaning services that exceed your ex
             >
               <div className="detail-banner-gradient" />
               <div className="detail-banner-content">
-                <Badge variant="success" size="md">✓ Verified Provider</Badge>
+                <Badge variant="success" size="md">✓ {t('service_detail.verified_provider')}</Badge>
                 <h1>{service.title}</h1>
                 <div className="detail-banner-meta">
                   <Rating value={service.rating} count={service.reviewCount} size="md" />
                   <span className="detail-meta-sep">·</span>
                   <span><MapPin size={16} /> {service.location}</span>
                   <span className="detail-meta-sep">·</span>
-                  <span><Clock size={16} /> {service.responseTime} response</span>
+                  <span><Clock size={16} /> {service.responseTime} {t('service_detail.response')}</span>
                 </div>
               </div>
             </motion.div>
@@ -97,7 +99,7 @@ We are committed to delivering exceptional cleaning services that exceed your ex
                   className={`detail-tab ${activeTab === tab ? 'active' : ''}`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  {t(`service_detail.tab_${tab}`)}
                 </button>
               ))}
             </div>
@@ -105,9 +107,9 @@ We are committed to delivering exceptional cleaning services that exceed your ex
             {/* Tab Content */}
             {activeTab === 'overview' && (
               <motion.div className="detail-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <h3>About This Service</h3>
+                <h3>{t('service_detail.about_service')}</h3>
                 <p className="detail-description">{service.description}</p>
-                <h4>What's Included</h4>
+                <h4>{t('service_detail.whats_included')}</h4>
                 <div className="detail-highlights">
                   {service.highlights.map((h, i) => (
                     <div key={i} className="detail-highlight">
@@ -121,11 +123,11 @@ We are committed to delivering exceptional cleaning services that exceed your ex
 
             {activeTab === 'packages' && (
               <motion.div className="detail-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <h3>Pricing Packages</h3>
+                <h3>{t('service_detail.pricing_packages')}</h3>
                 <div className="detail-packages">
                   {service.packages.map((pkg, i) => (
                     <div key={i} className={`detail-package ${i === 1 ? 'featured' : ''}`}>
-                      {i === 1 && <Badge variant="primary" size="sm">Most Popular</Badge>}
+                      {i === 1 && <Badge variant="primary" size="sm">{t('service_detail.most_popular')}</Badge>}
                       <h4>{pkg.name}</h4>
                       <div className="detail-package-price">
                         <span>LKR {pkg.price.toLocaleString()}</span>
@@ -135,7 +137,7 @@ We are committed to delivering exceptional cleaning services that exceed your ex
                           <li key={j}><CheckCircle size={16} /> {f}</li>
                         ))}
                       </ul>
-                      <Button variant={i === 1 ? 'primary' : 'secondary'} fullWidth>Select Package</Button>
+                      <Button variant={i === 1 ? 'primary' : 'secondary'} fullWidth>{t('service_detail.select_package')}</Button>
                     </div>
                   ))}
                 </div>
@@ -145,7 +147,7 @@ We are committed to delivering exceptional cleaning services that exceed your ex
             {activeTab === 'reviews' && (
               <motion.div className="detail-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <div className="detail-reviews-header">
-                  <h3>Reviews ({service.reviewCount})</h3>
+                  <h3>{t('service_detail.reviews_count')} ({service.reviewCount})</h3>
                   <div className="detail-reviews-summary">
                     <span className="detail-reviews-avg">{service.rating}</span>
                     <Rating value={service.rating} size="md" showValue={false} />
@@ -176,39 +178,39 @@ We are committed to delivering exceptional cleaning services that exceed your ex
               <div className="detail-sidebar-provider">
                 <Avatar name={service.providerName} size="xl" />
                 <h4>{service.providerName}</h4>
-                <p>{service.category} Expert</p>
+                <p>{service.category} {t('service_detail.expert')}</p>
                 <Rating value={service.rating} count={service.reviewCount} size="sm" />
               </div>
               <div className="detail-sidebar-stats">
                 <div className="detail-sidebar-stat">
                   <span className="detail-sidebar-stat-val">{service.completedJobs}</span>
-                  <span className="detail-sidebar-stat-label">Jobs Done</span>
+                  <span className="detail-sidebar-stat-label">{t('service_detail.jobs_done')}</span>
                 </div>
                 <div className="detail-sidebar-stat">
                   <span className="detail-sidebar-stat-val">{service.responseTime}</span>
-                  <span className="detail-sidebar-stat-label">Response</span>
+                  <span className="detail-sidebar-stat-label">{t('service_detail.response_val')}</span>
                 </div>
                 <div className="detail-sidebar-stat">
                   <span className="detail-sidebar-stat-val">{service.memberSince}</span>
-                  <span className="detail-sidebar-stat-label">Member Since</span>
+                  <span className="detail-sidebar-stat-label">{t('service_detail.member_since')}</span>
                 </div>
               </div>
               <div className="detail-sidebar-price">
-                <span className="detail-sidebar-price-label">Starting from</span>
+                <span className="detail-sidebar-price-label">{t('service_detail.starting_from')}</span>
                 <span className="detail-sidebar-price-value">LKR {service.price.toLocaleString()}</span>
               </div>
               <div className="detail-sidebar-actions">
                 <Link to={isAuthenticated ? '/chat' : '/login'} style={{ width: '100%' }}>
-                  <Button variant="primary" size="lg" fullWidth icon={Calendar}>Book Now</Button>
+                  <Button variant="primary" size="lg" fullWidth icon={Calendar}>{t('service_detail.book_now')}</Button>
                 </Link>
                 <Link to={isAuthenticated ? '/chat' : '/login'} style={{ width: '100%' }}>
-                  <Button variant="secondary" size="lg" fullWidth icon={MessageSquare}>Message</Button>
+                  <Button variant="secondary" size="lg" fullWidth icon={MessageSquare}>{t('service_detail.message')}</Button>
                 </Link>
               </div>
               <div className="detail-sidebar-footer">
-                <button><Share2 size={16} /> Share</button>
-                <button><Heart size={16} /> Save</button>
-                <button><Flag size={16} /> Report</button>
+                <button><Share2 size={16} /> {t('service_detail.share')}</button>
+                <button><Heart size={16} /> {t('service_detail.save')}</button>
+                <button><Flag size={16} /> {t('service_detail.report')}</button>
               </div>
             </div>
           </div>

@@ -15,6 +15,37 @@ const resources = {
         login: "Log In",
         get_started: "Get Started"
       },
+      not_found: {
+        title: "Page Not Found",
+        desc: "Oops! The page you're looking for doesn't exist or has been moved.",
+        btn_home: "Go Home",
+        btn_browse: "Browse Services"
+      },
+      service_detail: {
+        breadcrumb_home: "Home",
+        breadcrumb_services: "Services",
+        verified_provider: "Verified Provider",
+        response: "response",
+        tab_overview: "Overview",
+        tab_packages: "Packages",
+        tab_reviews: "Reviews",
+        about_service: "About This Service",
+        whats_included: "What's Included",
+        pricing_packages: "Pricing Packages",
+        most_popular: "Most Popular",
+        select_package: "Select Package",
+        reviews_count: "Reviews",
+        expert: "Expert",
+        jobs_done: "Jobs Done",
+        response_val: "Response",
+        member_since: "Member Since",
+        starting_from: "Starting from",
+        book_now: "Book Now",
+        message: "Message",
+        share: "Share",
+        save: "Save",
+        report: "Report"
+      },
       landing: {
         hero_badge: "Sri Lanka's #1 Service Marketplace",
         hero_title_1: "Find Trusted Experts",
@@ -97,6 +128,52 @@ const resources = {
         cta_primary_btn: "Get Started Free",
         cta_secondary_btn: "Browse Services"
       },
+      post_request: {
+        page_title: "Post a Service Request",
+        page_desc: "Tell us what you need and let providers come to you",
+        
+        step_category: "Category",
+        step_details: "Details",
+        step_budget: "Budget",
+        step_review: "Review",
+        
+        select_category: "Select a Category",
+        choose_type: "Choose the type of service you need",
+        select_sub: "Select a specific service (optional)",
+        all_prefix: "All",
+        
+        describe_request: "Describe Your Request",
+        be_specific: "Be specific to get the best responses",
+        title_label: "Title",
+        title_placeholder: "e.g., Need plumbing repair for leaky faucet",
+        desc_label: "Description",
+        desc_placeholder: "Describe the work needed, your requirements, and any specifics...",
+        drag_drop: "Drag & drop images or",
+        browse: "browse",
+        max_images: "Max 5 images, 5MB each",
+        
+        set_budget: "Set Budget & Location",
+        help_providers: "Help providers understand your expectations",
+        budget_label: "Budget (LKR)",
+        budget_placeholder: "e.g., 5000",
+        timeline_label: "Timeline",
+        select_timeline: "Select timeline",
+        urgent: "Urgent (Today/Tomorrow)",
+        this_week: "This Week",
+        this_month: "This Month",
+        flexible: "Flexible",
+        location_label: "Location",
+        select_location: "Select location",
+        
+        review_request: "Review Your Request",
+        double_check: "Double-check everything before posting",
+        sub_service: "Sub-service",
+        
+        btn_back: "Back",
+        btn_continue: "Continue",
+        btn_post: "Post Request",
+        success_msg: "Request posted successfully! Check console to see the multi-language DB payload."
+      },
       footer: {
         brand_desc: "Sri Lanka's smart service marketplace. Connecting you with trusted, verified service providers.",
         slogan: "Real People. Smart Solutions.",
@@ -117,6 +194,24 @@ const resources = {
         privacy_policy: "Privacy Policy",
         terms_service: "Terms of Service",
         cookie_policy: "Cookie Policy"
+      },
+      browse_services: {
+        title: "Browse Services",
+        subtitle: "From home repairs to legal advice — find the perfect professional across all categories",
+        search_placeholder: "Search services...",
+        all_categories: "All Categories",
+        all_locations: "All Locations",
+        sort_relevance: "Most Relevant",
+        sort_rating: "Highest Rated",
+        sort_price_low: "Price: Low to High",
+        sort_price_high: "Price: High to Low",
+        results: "results",
+        clear_all: "Clear All",
+        verified: "✓ Verified",
+        new: "New",
+        no_services: "No services found",
+        no_services_desc: "Try adjusting your search or filters to find what you're looking for.",
+        clear_filters: "Clear Filters"
       }
     }
   },
@@ -132,6 +227,37 @@ const resources = {
         logout: "ඉවත් වන්න",
         login: "ඇතුල් වන්න",
         get_started: "ආරම්භ කරන්න"
+      },
+      not_found: {
+        title: "පිටුව හමු නොවීය",
+        desc: "අයියෝ! ඔබ සොයන පිටුව නොපවතී හෝ ඉවත් කර ඇත.",
+        btn_home: "මුල් පිටුවට",
+        btn_browse: "සේවා සොයන්න"
+      },
+      service_detail: {
+        breadcrumb_home: "මුල් පිටුව",
+        breadcrumb_services: "සේවා",
+        verified_provider: "තහවුරු කළ සපයන්නෙක්",
+        response: "ප්‍රතිචාර දක්වයි",
+        tab_overview: "දළ විශ්ලේෂණය",
+        tab_packages: "පැකේජ",
+        tab_reviews: "සමාලෝචන",
+        about_service: "මෙම සේවාව ගැන",
+        whats_included: "ඇතුළත් කර ඇති දේ",
+        pricing_packages: "මිල පැකේජ",
+        most_popular: "වඩාත් ජනප්‍රිය",
+        select_package: "පැකේජය තෝරන්න",
+        reviews_count: "සමාලෝචන",
+        expert: "විශේෂඥ",
+        jobs_done: "කරන ලද වැඩ",
+        response_val: "ප්‍රතිචාර",
+        member_since: "සාමාජික වූයේ",
+        starting_from: "ආරම්භක මිල",
+        book_now: "දැන්ම වෙන්කරවා ගන්න",
+        message: "පණිවිඩය",
+        share: "බෙදාගන්න",
+        save: "සුරකින්න",
+        report: "වාර්තා කරන්න"
       },
       landing: {
         hero_badge: "ශ්‍රී ලංකාවේ අංක 1 සේවා වෙළඳපොළ",
@@ -215,6 +341,52 @@ const resources = {
         cta_primary_btn: "නොමිලේ ආරම්භ කරන්න",
         cta_secondary_btn: "සේවා සොයන්න"
       },
+      post_request: {
+        page_title: "සේවා ඉල්ලීමක් පළ කරන්න",
+        page_desc: "ඔබට අවශ්‍ය දේ අපට පවසන්න, සපයන්නන්ට ඔබ වෙත පැමිණීමට ඉඩ දෙන්න",
+        
+        step_category: "කාණ්ඩය",
+        step_details: "විස්තර",
+        step_budget: "අයවැය",
+        step_review: "සමාලෝචනය",
+        
+        select_category: "කාණ්ඩයක් තෝරන්න",
+        choose_type: "ඔබට අවශ්‍ය සේවා වර්ගය තෝරන්න",
+        select_sub: "නිශ්චිත සේවාවක් තෝරන්න (විකල්ප)",
+        all_prefix: "සියලුම",
+        
+        describe_request: "ඔබේ ඉල්ලීම විස්තර කරන්න",
+        be_specific: "හොඳම ප්‍රතිචාර ලබා ගැනීමට නිශ්චිත වන්න",
+        title_label: "මාතෘකාව",
+        title_placeholder: "උදා: කාන්දු වන කරාමය සඳහා ජලනල අලුත්වැඩියාවක් අවශ්‍ය වේ",
+        desc_label: "විස්තරය",
+        desc_placeholder: "අවශ්‍ය කාර්යය, ඔබගේ අවශ්‍යතා, සහ ඕනෑම විශේෂත්වයක් විස්තර කරන්න...",
+        drag_drop: "රූප ඇද දමන්න හෝ",
+        browse: "පිරික්සන්න",
+        max_images: "උපරිම පින්තූර 5 ක්, එක් පින්තූරයක් සඳහා 5MB",
+        
+        set_budget: "අයවැය සහ ස්ථානය සකසන්න",
+        help_providers: "ඔබගේ අපේක්ෂාවන් තේරුම් ගැනීමට සපයන්නන්ට උදව් කරන්න",
+        budget_label: "අයවැය (රු.)",
+        budget_placeholder: "උදා: 5000",
+        timeline_label: "කාලසටහන",
+        select_timeline: "කාලසටහන තෝරන්න",
+        urgent: "හදිසි (අද/හෙට)",
+        this_week: "මෙම සතියේ",
+        this_month: "මෙම මාසයේ",
+        flexible: "නම්‍යශීලී",
+        location_label: "ස්ථානය",
+        select_location: "ස්ථානය තෝරන්න",
+        
+        review_request: "ඔබගේ ඉල්ලීම සමාලෝචනය කරන්න",
+        double_check: "පළ කිරීමට පෙර සියල්ල දෙවරක් පරීක්ෂා කරන්න",
+        sub_service: "උප සේවාව",
+        
+        btn_back: "ආපසු",
+        btn_continue: "ඉදිරියට",
+        btn_post: "ඉල්ලීම පළ කරන්න",
+        success_msg: "ඉල්ලීම සාර්ථකව පළ කරන ලදී! බහු-භාෂා දත්ත ගබඩා ගෙවීම බැලීමට කන්සෝලය පරීක්ෂා කරන්න."
+      },
       footer: {
         brand_desc: "ශ්‍රී ලංකාවේ ස්මාර්ට් සේවා වෙළඳපොළ. තහවුරු කළ, විශ්වාසදායක සේවා සපයන්නන් සමඟ ඔබව සම්බන්ධ කිරීම.",
         slogan: "සැබෑ මිනිසුන්. ස්මාර්ට් විසඳුම්.",
@@ -235,6 +407,24 @@ const resources = {
         privacy_policy: "රහස්‍යතා ප්‍රතිපත්තිය",
         terms_service: "සේවා කොන්දේසි",
         cookie_policy: "කුකී ප්‍රතිපත්තිය"
+      },
+      browse_services: {
+        title: "සේවා සොයන්න",
+        subtitle: "නිවාස අලුත්වැඩියාවේ සිට නීති උපදෙස් දක්වා — සියලුම කාණ්ඩ හරහා පරිපූර්ණ වෘත්තිකයෙකු සොයා ගන්න",
+        search_placeholder: "සේවා සොයන්න...",
+        all_categories: "සියලුම කාණ්ඩ",
+        all_locations: "සියලුම ස්ථාන",
+        sort_relevance: "වඩාත් අදාළ",
+        sort_rating: "ඉහළම ශ්‍රේණිගත කළ",
+        sort_price_low: "මිල: අඩු සිට වැඩි",
+        sort_price_high: "මිල: වැඩි සිට අඩු",
+        results: "ප්‍රතිඵල",
+        clear_all: "සියල්ල ඉවත් කරන්න",
+        verified: "✓ තහවුරු කළ",
+        new: "නව",
+        no_services: "කිසිදු සේවාවක් හමු නොවීය",
+        no_services_desc: "ඔබ සොයන දේ සොයා ගැනීමට ඔබේ සෙවීම හෝ පෙරහන් සකස් කිරීමට උත්සාහ කරන්න.",
+        clear_filters: "පෙරහන් ඉවත් කරන්න"
       }
     }
   },
@@ -250,6 +440,37 @@ const resources = {
         logout: "வெளியேறு",
         login: "உள்நுழைக",
         get_started: "தொடங்குங்கள்"
+      },
+      not_found: {
+        title: "பக்கம் காணப்படவில்லை",
+        desc: "அச்சச்சோ! நீங்கள் தேடும் பக்கம் இல்லை அல்லது நகர்த்தப்பட்டுள்ளது.",
+        btn_home: "முகப்புக்குச் செல்க",
+        btn_browse: "சேவைகளைத் தேடுக"
+      },
+      service_detail: {
+        breadcrumb_home: "முகப்பு",
+        breadcrumb_services: "சேவைகள்",
+        verified_provider: "சரிபார்க்கப்பட்ட வழங்குநர்",
+        response: "பதிலளிப்பு",
+        tab_overview: "கண்ணோட்டம்",
+        tab_packages: "தொகுப்புகள்",
+        tab_reviews: "விமர்சனங்கள்",
+        about_service: "இந்த சேவை பற்றி",
+        whats_included: "என்ன சேர்க்கப்பட்டுள்ளது",
+        pricing_packages: "விலை தொகுப்புகள்",
+        most_popular: "மிகவும் பிரபலமானவை",
+        select_package: "தொகுப்பைத் தேர்ந்தெடுக்கவும்",
+        reviews_count: "விமர்சனங்கள்",
+        expert: "நிபுணர்",
+        jobs_done: "முடிக்கப்பட்ட வேலைகள்",
+        response_val: "பதிலளிப்பு",
+        member_since: "உறுப்பினராக இணைந்தது",
+        starting_from: "ஆரம்ப விலை",
+        book_now: "இப்போதே பதிவு செய்",
+        message: "செய்தி",
+        share: "பகிர்",
+        save: "சேமி",
+        report: "புகாரளி"
       },
       landing: {
         hero_badge: "இலங்கையின் சிறந்த சேவை சந்தை",
@@ -333,6 +554,52 @@ const resources = {
         cta_primary_btn: "இலவசமாகத் தொடங்குங்கள்",
         cta_secondary_btn: "சேவைகளைத் தேடுக"
       },
+      post_request: {
+        page_title: "சேவை கோரிக்கையை இடுக",
+        page_desc: "உங்களுக்கு என்ன தேவை என்பதைச் சொல்லுங்கள், வழங்குநர்கள் உங்களிடம் வரட்டும்",
+        
+        step_category: "வகை",
+        step_details: "விவரங்கள்",
+        step_budget: "பட்ஜெட்",
+        step_review: "மதிப்பாய்வு",
+        
+        select_category: "ஒரு வகையைத் தேர்ந்தெடுக்கவும்",
+        choose_type: "உங்களுக்குத் தேவையான சேவை வகையைத் தேர்வு செய்யவும்",
+        select_sub: "ஒரு குறிப்பிட்ட சேவையைத் தேர்ந்தெடுக்கவும் (விருப்பத்தேர்வு)",
+        all_prefix: "அனைத்து",
+        
+        describe_request: "உங்கள் கோரிக்கையை விவரிக்கவும்",
+        be_specific: "சிறந்த பதில்களைப் பெற குறிப்பாக இருக்கவும்",
+        title_label: "தலைப்பு",
+        title_placeholder: "உதாரணம்: கசியும் குழாய்க்கு நீர் குழாய் பழுது தேவை",
+        desc_label: "விளக்கம்",
+        desc_placeholder: "தேவையான வேலை, உங்கள் தேவைகள் மற்றும் ஏதேனும் சிறப்பம்சங்கள் பற்றி விவரிக்கவும்...",
+        drag_drop: "படங்களை இழுத்து விடவும் அல்லது",
+        browse: "உலாவுக",
+        max_images: "அதிகபட்சம் 5 படங்கள், தலா 5MB",
+        
+        set_budget: "பட்ஜெட் மற்றும் இருப்பிடத்தை அமைக்கவும்",
+        help_providers: "உங்கள் எதிர்பார்ப்புகளை புரிந்துகொள்ள வழங்குநர்களுக்கு உதவவும்",
+        budget_label: "பட்ஜெட் (ரூ.)",
+        budget_placeholder: "உதாரணம்: 5000",
+        timeline_label: "காலக்கட்டம்",
+        select_timeline: "காலக்கட்டத்தைத் தேர்ந்தெடுக்கவும்",
+        urgent: "அவசரம் (இன்று/நாளை)",
+        this_week: "இந்த வாரம்",
+        this_month: "இந்த மாதம்",
+        flexible: "நெகிழ்வானது",
+        location_label: "இடம்",
+        select_location: "இடத்தைத் தேர்ந்தெடுக்கவும்",
+        
+        review_request: "உங்கள் கோரிக்கையை மதிப்பாய்வு செய்யவும்",
+        double_check: "இடுகையிடுவதற்கு முன் எல்லாவற்றையும் இருமுறை சரிபார்க்கவும்",
+        sub_service: "உப-சேவை",
+        
+        btn_back: "பின்செல்",
+        btn_continue: "தொடர்க",
+        btn_post: "கோரிக்கையை இடுக",
+        success_msg: "கோரிக்கை வெற்றிகரமாக இடுகையிடப்பட்டது! பல மொழி தரவுத்தள சுமையைக் காண கன்சோலை சரிபார்க்கவும்."
+      },
       footer: {
         brand_desc: "இலங்கையின் ஸ்மார்ட் சேவை சந்தை. நம்பகமான, சரிபார்க்கப்பட்ட சேவை வழங்குநர்களுடன் உங்களை இணைக்கிறது.",
         slogan: "உண்மையான மனிதர்கள். ஸ்மார்ட் தீர்வுகள்.",
@@ -353,6 +620,24 @@ const resources = {
         privacy_policy: "தனியுரிமைக் கொள்கை",
         terms_service: "சேவை விதிமுறைகள்",
         cookie_policy: "குக்கீ கொள்கை"
+      },
+      browse_services: {
+        title: "சேவைகளைத் தேடுக",
+        subtitle: "வீட்டு பழுதுபார்த்தல் முதல் சட்ட ஆலோசனை வரை - அனைத்து பிரிவுகளிலும் சரியான நிபுணரைக் கண்டறியவும்",
+        search_placeholder: "சேவைகளைத் தேடுக...",
+        all_categories: "அனைத்து பிரிவுகளும்",
+        all_locations: "அனைத்து இடங்களும்",
+        sort_relevance: "மிகவும் தொடர்புடையது",
+        sort_rating: "அதிக மதிப்பிடப்பட்டது",
+        sort_price_low: "விலை: குறைவு முதல் அதிகம்",
+        sort_price_high: "விலை: அதிகம் முதல் குறைவு",
+        results: "முடிவுகள்",
+        clear_all: "அனைத்தையும் அழிக்கவும்",
+        verified: "✓ சரிபார்க்கப்பட்டது",
+        new: "புதியது",
+        no_services: "சேவைகள் எதுவும் கிடைக்கவில்லை",
+        no_services_desc: "நீங்கள் தேடுவதைக் கண்டறிய உங்கள் தேடல் அல்லது வடிப்பான்களை சரிசெய்ய முயற்சிக்கவும்.",
+        clear_filters: "வடிப்பான்களை அழிக்கவும்"
       }
     }
   }

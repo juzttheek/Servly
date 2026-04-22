@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Search, MapPin, SlidersHorizontal, Star, ChevronDown, X, Grid3X3, List } from 'lucide-react';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -13,7 +14,28 @@ import './BrowseServices.css';
 // Demo services data — expanded to cover new categories
 const DEMO_SERVICES = [
   // Home Services
-  { id: '1', title: 'Professional Home Cleaning', providerName: 'Ashan Madusanka', category: 'home-services', subcategory: 'cleaning', price: 3500, priceType: 'fixed', rating: 4.9, reviewCount: 156, location: 'Colombo', description: 'Complete home cleaning service including deep cleaning of kitchen, bathrooms, and all rooms.', verified: true },
+  { 
+    id: '1', 
+    title: { 
+      en: 'Professional Home Cleaning', 
+      si: 'වෘත්තීය නිවාස පිරිසිදු කිරීම', 
+      ta: 'தொழில்முறை வீட்டை சுத்தம் செய்தல்' 
+    }, 
+    providerName: 'Ashan Madusanka', 
+    category: 'home-services', 
+    subcategory: 'cleaning', 
+    price: 3500, 
+    priceType: 'fixed', 
+    rating: 4.9, 
+    reviewCount: 156, 
+    location: 'Colombo', 
+    description: {
+      en: 'Complete home cleaning service including deep cleaning of kitchen, bathrooms, and all rooms.',
+      si: 'මුළුතැන්ගෙය, නාන කාමර සහ සියලුම කාමර දැඩි ලෙස පිරිසිදු කිරීම ඇතුළුව සම්පූර්ණ නිවාස පිරිසිදු කිරීමේ සේවාව.',
+      ta: 'சமையலறை, குளியலறைகள் மற்றும் அனைத்து அறைகளையும் ஆழமாக சுத்தம் செய்தல் உட்பட முழுமையான வீட்டை சுத்தம் செய்யும் சேவை.'
+    }, 
+    verified: true 
+  },
   { id: '2', title: 'Emergency Plumbing Service', providerName: 'Kamal Dissanayake', category: 'home-services', subcategory: 'plumbers', price: 2000, priceType: 'hourly', rating: 4.8, reviewCount: 89, location: 'Gampaha', description: 'Fast and reliable plumbing repairs, leak fixes, and pipe installations.', verified: true },
   { id: '3', title: 'Electrical Wiring & Repairs', providerName: 'Nimal Perera', category: 'home-services', subcategory: 'electricians', price: 1500, priceType: 'hourly', rating: 4.7, reviewCount: 134, location: 'Kottawa', description: 'Licensed electrician for wiring, installation, and electrical repair work.', verified: true },
   { id: '4', title: 'Interior & Exterior Painting', providerName: 'Tharindu Silva', category: 'home-services', subcategory: 'painting', price: 5000, priceType: 'starting', rating: 4.8, reviewCount: 67, location: 'Negombo', description: 'Quality paint jobs for residential and commercial properties.', verified: true },
@@ -46,6 +68,7 @@ const DEMO_SERVICES = [
 ];
 
 const BrowseServices = () => {
+  const { t, i18n } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
@@ -90,8 +113,8 @@ const BrowseServices = () => {
       <div className="container">
         {/* Page Header */}
         <div className="browse-header">
-          <h1>Browse Services</h1>
-          <p>From home repairs to legal advice — find the perfect professional across all categories</p>
+          <h1>{t('browse_services.title')}</h1>
+          <p>{t('browse_services.subtitle')}</p>
         </div>
 
         {/* Search & Filter Bar */}
@@ -100,7 +123,7 @@ const BrowseServices = () => {
             <Search size={20} className="browse-search-icon" />
             <input
               type="text"
-              placeholder="Search services..."
+              placeholder={t('browse_services.search_placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="browse-search-input"
@@ -117,10 +140,15 @@ const BrowseServices = () => {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            <option value="">All Categories</option>
-            {SERVICE_CATEGORIES.map(cat => (
-              <option key={cat.id} value={cat.id}>{cat.emoji} {cat.name}</option>
-            ))}
+            <option value="">{t('browse_services.all_categories')}</option>
+            {SERVICE_CATEGORIES.map(cat => {
+              const transKey = cat.id.replace(/-/g, '_');
+              return (
+                <option key={cat.id} value={cat.id}>
+                  {cat.emoji} {t(`landing.category_${transKey}_name`)}
+                </option>
+              );
+            })}
           </select>
 
           <select
@@ -128,7 +156,7 @@ const BrowseServices = () => {
             value={selectedLocation}
             onChange={(e) => setSelectedLocation(e.target.value)}
           >
-            <option value="">All Locations</option>
+            <option value="">{t('browse_services.all_locations')}</option>
             {LOCATIONS.map(loc => (
               <option key={loc} value={loc}>{loc}</option>
             ))}
@@ -139,10 +167,10 @@ const BrowseServices = () => {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
-            <option value="relevance">Most Relevant</option>
-            <option value="rating">Highest Rated</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
+            <option value="relevance">{t('browse_services.sort_relevance')}</option>
+            <option value="rating">{t('browse_services.sort_rating')}</option>
+            <option value="price-low">{t('browse_services.sort_price_low')}</option>
+            <option value="price-high">{t('browse_services.sort_price_high')}</option>
           </select>
 
           <div className="browse-view-toggle">
@@ -154,10 +182,10 @@ const BrowseServices = () => {
         {/* Active Filters */}
         {activeFilterCount > 0 && (
           <div className="browse-active-filters">
-            <span className="browse-filter-count">{filteredServices.length} results</span>
+            <span className="browse-filter-count">{filteredServices.length} {t('browse_services.results')}</span>
             {selectedCategory && (
               <Badge variant="primary" size="md">
-                {SERVICE_CATEGORIES.find(c => c.id === selectedCategory)?.emoji} {SERVICE_CATEGORIES.find(c => c.id === selectedCategory)?.name}
+                {SERVICE_CATEGORIES.find(c => c.id === selectedCategory)?.emoji} {t(`landing.category_${selectedCategory.replace(/-/g, '_')}_name`)}
                 <button onClick={() => setSelectedCategory('')}><X size={12} /></button>
               </Badge>
             )}
@@ -167,7 +195,7 @@ const BrowseServices = () => {
                 <button onClick={() => setSelectedLocation('')}><X size={12} /></button>
               </Badge>
             )}
-            <button className="browse-clear-all" onClick={clearFilters}>Clear All</button>
+            <button className="browse-clear-all" onClick={clearFilters}>{t('browse_services.clear_all')}</button>
           </div>
         )}
 
@@ -175,6 +203,7 @@ const BrowseServices = () => {
         <div className={`browse-grid ${viewMode === 'list' ? 'browse-list-view' : ''}`}>
           {filteredServices.map((service, i) => {
             const parentCat = SERVICE_CATEGORIES.find(c => c.id === service.category);
+            const transKey = parentCat ? parentCat.id.replace(/-/g, '_') : null;
             return (
               <motion.div
                 key={service.id}
@@ -186,17 +215,23 @@ const BrowseServices = () => {
                   <Card variant="default" padding="none" hover>
                     <div className="service-card-banner" style={{ background: `linear-gradient(135deg, ${parentCat?.color || '#2359C8'}20, ${parentCat?.color || '#1B3561'}10)` }}>
                       <Badge variant={service.verified ? 'success' : 'default'} size="sm">
-                        {service.verified ? '✓ Verified' : 'New'}
+                        {service.verified ? t('browse_services.verified') : t('browse_services.new')}
                       </Badge>
-                      <Badge variant="dark" size="sm">{parentCat?.emoji} {parentCat?.name || service.category}</Badge>
+                      <Badge variant="dark" size="sm">
+                        {parentCat?.emoji} {transKey ? t(`landing.category_${transKey}_name`) : service.category}
+                      </Badge>
                     </div>
                     <div className="service-card-body">
                       <div className="service-card-provider">
                         <Avatar name={service.providerName} size="sm" />
                         <span className="service-card-provider-name">{service.providerName}</span>
                       </div>
-                      <h3 className="service-card-title">{service.title}</h3>
-                      <p className="service-card-desc">{service.description}</p>
+                      <h3 className="service-card-title">
+                        {typeof service.title === 'string' ? service.title : (service.title[i18n.language] || service.title.en)}
+                      </h3>
+                      <p className="service-card-desc">
+                        {typeof service.description === 'string' ? service.description : (service.description[i18n.language] || service.description.en)}
+                      </p>
                       <div className="service-card-footer">
                         <Rating value={service.rating} count={service.reviewCount} size="sm" />
                         <div className="service-card-price-location">
@@ -215,9 +250,9 @@ const BrowseServices = () => {
         {filteredServices.length === 0 && (
           <div className="browse-empty">
             <Search size={48} />
-            <h3>No services found</h3>
-            <p>Try adjusting your search or filters to find what you're looking for.</p>
-            <Button variant="primary" onClick={clearFilters}>Clear Filters</Button>
+            <h3>{t('browse_services.no_services')}</h3>
+            <p>{t('browse_services.no_services_desc')}</p>
+            <Button variant="primary" onClick={clearFilters}>{t('browse_services.clear_filters')}</Button>
           </div>
         )}
       </div>

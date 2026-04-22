@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FileText, MapPin, DollarSign, Clock, ArrowRight, ArrowLeft, CheckCircle, Upload, Image } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import { SERVICE_CATEGORIES, LOCATIONS } from '../utils/constants';
@@ -9,6 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import './PostRequest.css';
 
 const PostRequest = () => {
+  const { t, i18n } = useTranslation();
   const [step, setStep] = useState(1);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -35,13 +37,46 @@ const PostRequest = () => {
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
-    // Would save to Firestore here
-    alert('Request posted successfully! (Demo)');
+    
+    // =========================================================================
+    // MULTI-LANGUAGE DATABASE PREPARATION
+    // In production, you would either:
+    // 1. Let the frontend send the strings to a Firebase Cloud Function, 
+    //    which auto-translates and saves the {en, si, ta} object.
+    // 2. OR structure it here using an auto-translate API before saving.
+    // Here is how we format the user's string data into our new UGC schema:
+    // =========================================================================
+    const requestPayload = {
+      category: formData.category,
+      subcategory: formData.subcategory,
+      title: {
+        en: formData.title,
+        si: `${formData.title} (Sinhala Translation)`, // Would come from Translation API
+        ta: `${formData.title} (Tamil Translation)`   // Would come from Translation API
+      },
+      description: {
+        en: formData.description,
+        si: `${formData.description} (Sinhala Translation)`,
+        ta: `${formData.description} (Tamil Translation)`
+      },
+      budget: formData.budget,
+      timeline: formData.timeline,
+      location: formData.location,
+      status: 'open',
+      createdAt: new Date().toISOString()
+    };
+
+    console.log("Saving to Firebase Database:", requestPayload);
+    
+    // Example Firestore call: 
+    // await addDocument('requests', requestPayload);
+
+    alert(t('post_request.success_msg'));
     navigate('/dashboard');
   };
 
@@ -50,8 +85,8 @@ const PostRequest = () => {
       <div className="container">
         <motion.div className="post-container" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="post-header">
-            <h1>Post a Service Request</h1>
-            <p>Tell us what you need and let providers come to you</p>
+            <h1>{t('post_request.page_title')}</h1>
+            <p>{t('post_request.page_desc')}</p>
           </div>
 
           {/* Progress */}
@@ -62,10 +97,10 @@ const PostRequest = () => {
                   {step > s ? <CheckCircle size={18} /> : s}
                 </div>
                 <span className="post-progress-label">
-                  {s === 1 && 'Category'}
-                  {s === 2 && 'Details'}
-                  {s === 3 && 'Budget'}
-                  {s === 4 && 'Review'}
+                  {s === 1 && t('post_request.step_category')}
+                  {s === 2 && t('post_request.step_details')}
+                  {s === 3 && t('post_request.step_budget')}
+                  {s === 4 && t('post_request.step_review')}
                 </span>
               </div>
             ))}
@@ -77,11 +112,14 @@ const PostRequest = () => {
           {/* Step 1: Category */}
           {step === 1 && (
             <motion.div className="post-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <h3>Select a Category</h3>
-              <p className="post-step-desc">Choose the type of service you need</p>
+              <h3>{t('post_request.select_category')}</h3>
+              <p className="post-step-desc">{t('post_request.choose_type')}</p>
               <div className="post-categories">
                 {SERVICE_CATEGORIES.map(cat => {
                   const Icon = cat.icon;
+                  // Dynamic translation for categories based on language
+                  const categoryName = t(`landing.category_${cat.id.replace(/-/g, '_')}_name`, { defaultValue: cat.name });
+                  
                   return (
                     <button
                       key={cat.id}
@@ -94,7 +132,7 @@ const PostRequest = () => {
                       <div className="post-category-icon" style={{ color: cat.color, background: `${cat.color}12` }}>
                         <Icon size={24} />
                       </div>
-                      <span>{cat.emoji} {cat.name}</span>
+                      <span>{cat.emoji} {categoryName}</span>
                     </button>
                   );
                 })}
@@ -107,13 +145,13 @@ const PostRequest = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <h4>Select a specific service (optional)</h4>
+                  <h4>{t('post_request.select_sub')}</h4>
                   <div className="post-subcategory-list">
                     <button
                       className={`post-subcategory ${!formData.subcategory ? 'active' : ''}`}
                       onClick={() => updateField('subcategory', '')}
                     >
-                      All {selectedCategoryObj.name}
+                      {t('post_request.all_prefix')} {t(`landing.category_${selectedCategoryObj.id.replace(/-/g, '_')}_name`, { defaultValue: selectedCategoryObj.name })}
                     </button>
                     {selectedCategoryObj.subcategories.map(sub => (
                       <button
@@ -121,6 +159,7 @@ const PostRequest = () => {
                         className={`post-subcategory ${formData.subcategory === sub.id ? 'active' : ''}`}
                         onClick={() => updateField('subcategory', sub.id)}
                       >
+                        {/* If we had translations for subcategories, we'd use them here */}
                         {sub.name}
                       </button>
                     ))}
@@ -133,15 +172,15 @@ const PostRequest = () => {
           {/* Step 2: Details */}
           {step === 2 && (
             <motion.div className="post-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <h3>Describe Your Request</h3>
-              <p className="post-step-desc">Be specific to get the best responses</p>
+              <h3>{t('post_request.describe_request')}</h3>
+              <p className="post-step-desc">{t('post_request.be_specific')}</p>
               <div className="post-form">
-                <Input label="Title" icon={FileText} placeholder="e.g., Need plumbing repair for leaky faucet" value={formData.title} onChange={e => updateField('title', e.target.value)} />
-                <Input label="Description" type="textarea" placeholder="Describe the work needed, your requirements, and any specifics..." value={formData.description} onChange={e => updateField('description', e.target.value)} />
+                <Input label={t('post_request.title_label')} icon={FileText} placeholder={t('post_request.title_placeholder')} value={formData.title} onChange={e => updateField('title', e.target.value)} />
+                <Input label={t('post_request.desc_label')} type="textarea" placeholder={t('post_request.desc_placeholder')} value={formData.description} onChange={e => updateField('description', e.target.value)} />
                 <div className="post-upload-area">
                   <Upload size={24} />
-                  <p>Drag & drop images or <span>browse</span></p>
-                  <p className="post-upload-hint">Max 5 images, 5MB each</p>
+                  <p>{t('post_request.drag_drop')} <span>{t('post_request.browse')}</span></p>
+                  <p className="post-upload-hint">{t('post_request.max_images')}</p>
                 </div>
               </div>
             </motion.div>
@@ -150,24 +189,24 @@ const PostRequest = () => {
           {/* Step 3: Budget */}
           {step === 3 && (
             <motion.div className="post-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <h3>Set Budget & Location</h3>
-              <p className="post-step-desc">Help providers understand your expectations</p>
+              <h3>{t('post_request.set_budget')}</h3>
+              <p className="post-step-desc">{t('post_request.help_providers')}</p>
               <div className="post-form">
-                <Input label="Budget (LKR)" icon={DollarSign} type="number" placeholder="e.g., 5000" value={formData.budget} onChange={e => updateField('budget', e.target.value)} />
+                <Input label={t('post_request.budget_label')} icon={DollarSign} type="number" placeholder={t('post_request.budget_placeholder')} value={formData.budget} onChange={e => updateField('budget', e.target.value)} />
                 <div className="post-form-group">
-                  <label className="input-label">Timeline</label>
+                  <label className="input-label">{t('post_request.timeline_label')}</label>
                   <select className="post-select" value={formData.timeline} onChange={e => updateField('timeline', e.target.value)}>
-                    <option value="">Select timeline</option>
-                    <option value="urgent">Urgent (Today/Tomorrow)</option>
-                    <option value="this-week">This Week</option>
-                    <option value="this-month">This Month</option>
-                    <option value="flexible">Flexible</option>
+                    <option value="">{t('post_request.select_timeline')}</option>
+                    <option value="urgent">{t('post_request.urgent')}</option>
+                    <option value="this-week">{t('post_request.this_week')}</option>
+                    <option value="this-month">{t('post_request.this_month')}</option>
+                    <option value="flexible">{t('post_request.flexible')}</option>
                   </select>
                 </div>
                 <div className="post-form-group">
-                  <label className="input-label">Location</label>
+                  <label className="input-label">{t('post_request.location_label')}</label>
                   <select className="post-select" value={formData.location} onChange={e => updateField('location', e.target.value)}>
-                    <option value="">Select location</option>
+                    <option value="">{t('post_request.select_location')}</option>
                     {LOCATIONS.map(loc => <option key={loc} value={loc}>{loc}</option>)}
                   </select>
                 </div>
@@ -178,41 +217,41 @@ const PostRequest = () => {
           {/* Step 4: Review */}
           {step === 4 && (
             <motion.div className="post-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <h3>Review Your Request</h3>
-              <p className="post-step-desc">Double-check everything before posting</p>
+              <h3>{t('post_request.review_request')}</h3>
+              <p className="post-step-desc">{t('post_request.double_check')}</p>
               <div className="post-review">
                 <div className="post-review-item">
-                  <span className="post-review-label">Category</span>
+                  <span className="post-review-label">{t('post_request.step_category')}</span>
                   <span className="post-review-value">
-                    {selectedCategoryObj ? `${selectedCategoryObj.emoji} ${selectedCategoryObj.name}` : '—'}
+                    {selectedCategoryObj ? `${selectedCategoryObj.emoji} ${t(`landing.category_${selectedCategoryObj.id.replace(/-/g, '_')}_name`, { defaultValue: selectedCategoryObj.name })}` : '—'}
                   </span>
                 </div>
                 {formData.subcategory && (
                   <div className="post-review-item">
-                    <span className="post-review-label">Sub-service</span>
+                    <span className="post-review-label">{t('post_request.sub_service')}</span>
                     <span className="post-review-value">
                       {selectedCategoryObj?.subcategories.find(s => s.id === formData.subcategory)?.name || '—'}
                     </span>
                   </div>
                 )}
                 <div className="post-review-item">
-                  <span className="post-review-label">Title</span>
+                  <span className="post-review-label">{t('post_request.title_label')}</span>
                   <span className="post-review-value">{formData.title || '—'}</span>
                 </div>
                 <div className="post-review-item">
-                  <span className="post-review-label">Description</span>
+                  <span className="post-review-label">{t('post_request.desc_label')}</span>
                   <span className="post-review-value">{formData.description || '—'}</span>
                 </div>
                 <div className="post-review-item">
-                  <span className="post-review-label">Budget</span>
+                  <span className="post-review-label">{t('post_request.step_budget')}</span>
                   <span className="post-review-value">{formData.budget ? `LKR ${Number(formData.budget).toLocaleString()}` : '—'}</span>
                 </div>
                 <div className="post-review-item">
-                  <span className="post-review-label">Timeline</span>
-                  <span className="post-review-value">{formData.timeline || '—'}</span>
+                  <span className="post-review-label">{t('post_request.timeline_label')}</span>
+                  <span className="post-review-value">{formData.timeline ? t(`post_request.${formData.timeline.replace('-', '_')}`, { defaultValue: formData.timeline }) : '—'}</span>
                 </div>
                 <div className="post-review-item">
-                  <span className="post-review-label">Location</span>
+                  <span className="post-review-label">{t('post_request.location_label')}</span>
                   <span className="post-review-value">{formData.location || '—'}</span>
                 </div>
               </div>
@@ -222,13 +261,13 @@ const PostRequest = () => {
           {/* Navigation */}
           <div className="post-nav">
             {step > 1 && (
-              <Button variant="secondary" icon={ArrowLeft} onClick={() => setStep(s => s - 1)}>Back</Button>
+              <Button variant="secondary" icon={ArrowLeft} onClick={() => setStep(s => s - 1)}>{t('post_request.btn_back')}</Button>
             )}
             <div style={{ flex: 1 }} />
             {step < totalSteps ? (
-              <Button variant="primary" icon={ArrowRight} iconPosition="right" disabled={!canNext()} onClick={() => setStep(s => s + 1)}>Continue</Button>
+              <Button variant="primary" icon={ArrowRight} iconPosition="right" disabled={!canNext()} onClick={() => setStep(s => s + 1)}>{t('post_request.btn_continue')}</Button>
             ) : (
-              <Button variant="primary" icon={CheckCircle} iconPosition="right" onClick={handleSubmit}>Post Request</Button>
+              <Button variant="primary" icon={CheckCircle} iconPosition="right" onClick={handleSubmit}>{t('post_request.btn_post')}</Button>
             )}
           </div>
         </motion.div>
