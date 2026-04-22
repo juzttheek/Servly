@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './Footer.css';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -17,9 +19,9 @@ const Footer = () => {
                 <span className="footer-logo-text">Servly</span>
               </Link>
               <p className="footer-brand-desc">
-                Sri Lanka's smart service marketplace. Connecting you with trusted, verified service providers.
+                {t('footer.brand_desc')}
               </p>
-              <p className="footer-slogan">Real People. Smart Solutions.</p>
+              <p className="footer-slogan">{t('footer.slogan')}</p>
               <div className="footer-socials">
                 <a href="#" className="footer-social" aria-label="Facebook">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -38,30 +40,30 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div className="footer-col">
-              <h4 className="footer-col-title">Quick Links</h4>
+              <h4 className="footer-col-title">{t('footer.quick_links')}</h4>
               <ul className="footer-links">
-                <li><Link to="/services">Browse Services</Link></li>
-                <li><Link to="/post-request">Post a Request</Link></li>
-                <li><Link to="/register">Become a Provider</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/services">{t('footer.link_browse_services')}</Link></li>
+                <li><Link to="/post-request">{t('footer.link_post_request')}</Link></li>
+                <li><Link to="/register">{t('footer.link_become_provider')}</Link></li>
+                <li><Link to="/dashboard">{t('footer.link_dashboard')}</Link></li>
               </ul>
             </div>
 
             {/* Services */}
             <div className="footer-col">
-              <h4 className="footer-col-title">Services</h4>
+              <h4 className="footer-col-title">{t('footer.services')}</h4>
               <ul className="footer-links">
-                <li><Link to="/services?category=home-cleaning">Home Cleaning</Link></li>
-                <li><Link to="/services?category=plumbing">Plumbing</Link></li>
-                <li><Link to="/services?category=electrical">Electrical</Link></li>
-                <li><Link to="/services?category=delivery">Delivery</Link></li>
-                <li><Link to="/services?category=photography">Photography</Link></li>
+                <li><Link to="/services?category=home-cleaning">{t('footer.service_cleaning')}</Link></li>
+                <li><Link to="/services?category=plumbing">{t('footer.service_plumbing')}</Link></li>
+                <li><Link to="/services?category=electrical">{t('footer.service_electrical')}</Link></li>
+                <li><Link to="/services?category=delivery">{t('footer.service_delivery')}</Link></li>
+                <li><Link to="/services?category=photography">{t('footer.service_photography')}</Link></li>
               </ul>
             </div>
 
             {/* Contact */}
             <div className="footer-col">
-              <h4 className="footer-col-title">Contact</h4>
+              <h4 className="footer-col-title">{t('footer.contact')}</h4>
               <ul className="footer-contact">
                 <li>
                   <Mail size={16} />
@@ -73,7 +75,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <MapPin size={16} />
-                  <span>Colombo, Sri Lanka</span>
+                  <span>{t('footer.location')}</span>
                 </li>
               </ul>
             </div>
@@ -85,12 +87,12 @@ const Footer = () => {
         <div className="container">
           <div className="footer-bottom-inner">
             <p className="footer-copyright">
-              © {currentYear} Servly. All rights reserved.
+              {t('footer.copyright', { year: currentYear })}
             </p>
             <div className="footer-bottom-links">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-              <a href="#">Cookie Policy</a>
+              <a href="#">{t('footer.privacy_policy')}</a>
+              <a href="#">{t('footer.terms_service')}</a>
+              <a href="#">{t('footer.cookie_policy')}</a>
             </div>
           </div>
         </div>

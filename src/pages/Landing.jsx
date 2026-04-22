@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   Search, ArrowRight, CheckCircle, Star, Shield, Zap,
   Users, Clock, MapPin, Play, ChevronRight, Sparkles,
@@ -21,6 +22,7 @@ const Landing = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Animate stats counter
   useEffect(() => {
@@ -96,19 +98,18 @@ const Landing = () => {
           >
             <motion.div variants={fadeUp}>
               <Badge variant="dark" size="lg" dot>
-                <Sparkles size={14} /> Sri Lanka's #1 Service Marketplace
+                <Sparkles size={14} /> {t('landing.hero_badge')}
               </Badge>
             </motion.div>
 
             <motion.h1 className="hero-title" variants={fadeUp}>
-              Find Trusted Experts
+              {t('landing.hero_title_1')}
               <br />
-              <span className="hero-title-highlight">For Every Service</span>
+              <span className="hero-title-highlight">{t('landing.hero_title_highlight')}</span>
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={fadeUp}>
-              Connect with verified professionals for home services, freelance work,
-              deliveries, and more. Fast, reliable, and all in one place.
+              {t('landing.hero_subtitle')}
             </motion.p>
 
             <motion.form className="hero-search" variants={fadeUp} onSubmit={handleSearch}>
@@ -116,17 +117,17 @@ const Landing = () => {
                 <Search size={22} className="hero-search-icon" />
                 <input
                   type="text"
-                  placeholder="What service do you need?"
+                  placeholder={t('landing.search_placeholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="hero-search-input"
                 />
                 <Button type="submit" variant="primary" size="lg" icon={ArrowRight} iconPosition="right">
-                  Search
+                  {t('landing.search_button')}
                 </Button>
               </div>
               <div className="hero-search-tags">
-                <span className="hero-search-tags-label">Popular:</span>
+                <span className="hero-search-tags-label">{t('landing.popular')}</span>
                 {['Home Cleaning', 'Plumbing', 'Photography', 'Web Development'].map(tag => (
                   <Link
                     key={tag}
@@ -154,7 +155,7 @@ const Landing = () => {
                   ))}
                   <span>4.9</span>
                 </div>
-                <p>Trusted by <strong>10,000+</strong> customers</p>
+                <p>{t('landing.trusted_by')} <strong>10,000+</strong> {t('landing.customers')}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -169,22 +170,22 @@ const Landing = () => {
               <div className="hero-floating-card hero-fc-1">
                 <div className="hero-fc-icon"><Shield size={20} /></div>
                 <div>
-                  <p className="hero-fc-title">Verified Providers</p>
-                  <p className="hero-fc-desc">100% background checked</p>
+                  <p className="hero-fc-title">{t('landing.verified_providers')}</p>
+                  <p className="hero-fc-desc">{t('landing.verified_desc')}</p>
                 </div>
               </div>
               <div className="hero-floating-card hero-fc-2">
                 <div className="hero-fc-icon hero-fc-icon-blue"><Zap size={20} /></div>
                 <div>
-                  <p className="hero-fc-title">Fast Matching</p>
-                  <p className="hero-fc-desc">Under 5 minutes</p>
+                  <p className="hero-fc-title">{t('landing.fast_matching')}</p>
+                  <p className="hero-fc-desc">{t('landing.fast_desc')}</p>
                 </div>
               </div>
               <div className="hero-floating-card hero-fc-3">
                 <div className="hero-fc-icon hero-fc-icon-green"><Star size={20} /></div>
                 <div>
-                  <p className="hero-fc-title">4.9★ Average</p>
-                  <p className="hero-fc-desc">15,000+ reviews</p>
+                  <p className="hero-fc-title">{t('landing.avg_rating')}</p>
+                  <p className="hero-fc-desc">{t('landing.reviews')}</p>
                 </div>
               </div>
 
@@ -192,8 +193,8 @@ const Landing = () => {
                 <div className="hero-visual-gradient" />
                 <div className="hero-visual-content">
                   <HeartHandshake size={64} strokeWidth={1.5} />
-                  <h3>Smart Service<br/>Marketplace</h3>
-                  <p>Connecting people<br/>with trusted experts</p>
+                  <h3>{t('landing.smart_marketplace')}</h3>
+                  <p>{t('landing.connecting_people')}</p>
                 </div>
               </div>
             </div>
@@ -231,16 +232,18 @@ const Landing = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeUp}
           >
-            <Badge variant="primary" size="lg">Services</Badge>
-            <h2>Explore Our Categories</h2>
+            <Badge variant="primary" size="lg">{t('landing.categories_badge')}</Badge>
+            <h2>{t('landing.categories_title')}</h2>
             <p className="section-desc">
-              From home maintenance to creative freelance work — find the right professional for any task.
+              {t('landing.categories_desc')}
             </p>
           </motion.div>
 
           <div className="categories-grid">
             {SERVICE_CATEGORIES.map((cat, i) => {
               const IconComponent = cat.icon;
+              // Clean key id: e.g. "home-cleaning" -> "home_cleaning"
+              const transKey = cat.id.replace(/-/g, '_');
               return (
                 <motion.div
                   key={cat.id}
@@ -254,9 +257,9 @@ const Landing = () => {
                     <div className="category-icon" style={{ background: `${cat.color}12`, color: cat.color }}>
                       <IconComponent size={26} />
                     </div>
-                    <h4 className="category-name">{cat.name}</h4>
-                    <p className="category-desc">{cat.description}</p>
-                    <span className="category-count">{cat.count} providers</span>
+                    <h4 className="category-name">{t(`landing.category_${transKey}_name`)}</h4>
+                    <p className="category-desc">{t(`landing.category_${transKey}_desc`)}</p>
+                    <span className="category-count">{cat.count} {t('landing.providers_count')}</span>
                     <div className="category-arrow"><ChevronRight size={18} /></div>
                   </Link>
                 </motion.div>
@@ -276,10 +279,10 @@ const Landing = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeUp}
           >
-            <Badge variant="primary" size="lg">How It Works</Badge>
-            <h2>Simple Steps to Get Started</h2>
+            <Badge variant="primary" size="lg">{t('landing.how_badge')}</Badge>
+            <h2>{t('landing.how_title')}</h2>
             <p className="section-desc">
-              Getting the help you need has never been easier. Three simple steps and you're done.
+              {t('landing.how_desc')}
             </p>
           </motion.div>
 
@@ -296,8 +299,8 @@ const Landing = () => {
               >
                 <div className="how-step-number">{step.step}</div>
                 <div className="how-step-connector" />
-                <h3 className="how-step-title">{step.title}</h3>
-                <p className="how-step-desc">{step.description}</p>
+                <h3 className="how-step-title">{t(`landing.how_step${step.step}_title`)}</h3>
+                <p className="how-step-desc">{t(`landing.how_step${step.step}_desc`)}</p>
               </motion.div>
             ))}
           </div>
@@ -316,29 +319,29 @@ const Landing = () => {
               variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             >
               <motion.div variants={fadeUp}>
-                <Badge variant="primary" size="lg">Why Servly</Badge>
+                <Badge variant="primary" size="lg">{t('landing.why_badge')}</Badge>
               </motion.div>
               <motion.h2 variants={fadeUp}>
-                The Smarter Way to Find Services
+                {t('landing.why_title')}
               </motion.h2>
               <motion.p className="why-desc" variants={fadeUp}>
-                We combine technology with human expertise to give you the best experience in finding and booking services.
+                {t('landing.why_desc')}
               </motion.p>
 
               <div className="why-features">
                 {[
-                  { icon: Shield, title: 'Verified & Trusted', desc: 'Every provider is vetted and verified for your safety.' },
-                  { icon: Zap, title: 'Lightning Fast', desc: 'Smart matching connects you with the right expert in minutes.' },
-                  { icon: Award, title: 'Quality Guaranteed', desc: 'Ratings, reviews, and our quality standards ensure excellence.' },
-                  { icon: TrendingUp, title: 'Best Pricing', desc: 'Compare quotes and get the best value for your money.' }
+                  { icon: Shield, titleKey: 'why_feat1_title', descKey: 'why_feat1_desc' },
+                  { icon: Zap, titleKey: 'why_feat2_title', descKey: 'why_feat2_desc' },
+                  { icon: Award, titleKey: 'why_feat3_title', descKey: 'why_feat3_desc' },
+                  { icon: TrendingUp, titleKey: 'why_feat4_title', descKey: 'why_feat4_desc' }
                 ].map((feature, i) => (
                   <motion.div key={i} className="why-feature" variants={fadeUp} custom={i + 3}>
                     <div className="why-feature-icon">
                       <feature.icon size={22} />
                     </div>
                     <div>
-                      <h4 className="why-feature-title">{feature.title}</h4>
-                      <p className="why-feature-desc">{feature.desc}</p>
+                      <h4 className="why-feature-title">{t(`landing.${feature.titleKey}`)}</h4>
+                      <p className="why-feature-desc">{t(`landing.${feature.descKey}`)}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -364,21 +367,21 @@ const Landing = () => {
                     </svg>
                     <div className="why-stat-circle-text">
                       <span className="why-stat-circle-value">98%</span>
-                      <span className="why-stat-circle-label">Satisfied</span>
+                      <span className="why-stat-circle-label">{t('landing.why_stat_satisfied')}</span>
                     </div>
                   </div>
                   <div className="why-mini-stats">
                     <div className="why-mini-stat">
                       <span className="why-mini-value">2.5K+</span>
-                      <span className="why-mini-label">Providers</span>
+                      <span className="why-mini-label">{t('landing.why_stat_providers')}</span>
                     </div>
                     <div className="why-mini-stat">
                       <span className="why-mini-value">15K+</span>
-                      <span className="why-mini-label">Jobs Done</span>
+                      <span className="why-mini-label">{t('landing.why_stat_jobs')}</span>
                     </div>
                     <div className="why-mini-stat">
                       <span className="why-mini-value">4.9★</span>
-                      <span className="why-mini-label">Rating</span>
+                      <span className="why-mini-label">{t('landing.why_stat_rating')}</span>
                     </div>
                   </div>
                 </div>
@@ -398,17 +401,17 @@ const Landing = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeUp}
           >
-            <Badge variant="primary" size="lg">Testimonials</Badge>
-            <h2>What Our Customers Say</h2>
+            <Badge variant="primary" size="lg">{t('landing.testimonials_badge')}</Badge>
+            <h2>{t('landing.testimonials_title')}</h2>
             <p className="section-desc">
-              Don't just take our word for it — hear from the people who've experienced Servly.
+              {t('landing.testimonials_desc')}
             </p>
           </motion.div>
 
           <div className="testimonials-grid">
-            {TESTIMONIALS.map((t, i) => (
+            {TESTIMONIALS.map((testimonial, i) => (
               <motion.div
-                key={t.id}
+                key={testimonial.id}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -417,16 +420,16 @@ const Landing = () => {
               >
                 <div className="testimonial-card">
                   <div className="testimonial-stars">
-                    {[...Array(t.rating)].map((_, j) => (
+                    {[...Array(testimonial.rating)].map((_, j) => (
                       <Star key={j} size={16} fill="#F59E0B" color="#F59E0B" />
                     ))}
                   </div>
-                  <p className="testimonial-text">"{t.text}"</p>
+                  <p className="testimonial-text">"{t(`landing.testimonials_text${testimonial.id}`)}"</p>
                   <div className="testimonial-author">
-                    <Avatar name={t.name} size="md" />
+                    <Avatar name={testimonial.name} size="md" />
                     <div>
-                      <p className="testimonial-name">{t.name}</p>
-                      <p className="testimonial-role">{t.role}</p>
+                      <p className="testimonial-name">{testimonial.name}</p>
+                      <p className="testimonial-role">{t(`landing.testimonials_role${testimonial.id}`)}</p>
                     </div>
                   </div>
                 </div>
@@ -451,21 +454,20 @@ const Landing = () => {
             variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           >
             <motion.h2 variants={fadeUp}>
-              Ready to Get Started?
+              {t('landing.cta_title')}
             </motion.h2>
             <motion.p variants={fadeUp}>
-              Join thousands of customers and service providers on Servly.
-              Whether you need a service or want to offer one — we've got you covered.
+              {t('landing.cta_desc')}
             </motion.p>
             <motion.div className="cta-buttons" variants={fadeUp}>
               <Link to="/register">
                 <Button variant="primary" size="lg" icon={ArrowRight} iconPosition="right">
-                  Get Started Free
+                  {t('landing.cta_primary_btn')}
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="outline" size="lg">
-                  Browse Services
+                  {t('landing.cta_secondary_btn')}
                 </Button>
               </Link>
             </motion.div>
