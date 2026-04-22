@@ -333,6 +333,11 @@
   color: var(--color-success);
 }
 
+.hero-fc-icon-red {
+  background: rgba(225, 29, 72, 0.1);
+  color: #E11D48;
+}
+
 .hero-fc-title {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -429,7 +434,7 @@
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
 }
 
@@ -445,6 +450,7 @@
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 
 .category-card:hover {
@@ -456,6 +462,29 @@
 .category-card:hover .category-arrow {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Featured category card (Quick Help) */
+.category-card-featured {
+  border-color: rgba(225, 29, 72, 0.25);
+  background: linear-gradient(135deg, #FFF 0%, #FFF5F5 100%);
+}
+
+.category-card-featured:hover {
+  box-shadow: 0 8px 30px rgba(225, 29, 72, 0.15);
+}
+
+.category-featured-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #E11D48;
+  background: rgba(225, 29, 72, 0.08);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
 }
 
 .category-icon {
@@ -479,11 +508,40 @@
   line-height: 1.5;
 }
 
+/* Subcategory tags inside category card */
+.category-subcategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.category-sub-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-body);
+  background: var(--color-page-gray);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-blue-gray);
+  white-space: nowrap;
+}
+
+.category-sub-more {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-brand-blue);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(35, 89, 200, 0.06);
+}
+
 .category-count {
   font-size: var(--text-xs);
   font-weight: 600;
   color: var(--color-brand-blue);
   font-family: var(--font-heading);
+  margin-top: auto;
 }
 
 .category-arrow {
@@ -494,6 +552,13 @@
   opacity: 0;
   transform: translateX(-8px);
   transition: all var(--transition-base);
+}
+
+/* View All Categories toggle */
+.categories-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8);
 }
 
 /* ===== HOW IT WORKS ===== */
@@ -859,7 +924,7 @@
   }
 
   .categories-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .why-grid {
@@ -890,7 +955,7 @@
   }
 
   .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .how-steps {
@@ -930,8 +995,3 @@
   }
 }
 
-@media (max-width: 480px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
-}

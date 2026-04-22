@@ -1,111 +1,204 @@
 import { 
   Home, Truck, FileText, Wrench, Paintbrush, Zap, 
   Camera, Code, Hammer, Stethoscope, GraduationCap, 
-  Leaf
+  Leaf, Scale, Brain, Briefcase, Plane, User,
+  Monitor, AlertTriangle, Heart, Scissors, Utensils,
+  Car, Package, MapPin as MapPinIcon, PenTool, Video,
+  Share2, BookOpen, Globe, Calculator, Building,
+  Megaphone, Users, Phone, ShieldCheck, Dumbbell,
+  Pill, FlaskConical, Baby, Lightbulb, Languages
 } from 'lucide-react';
 
 export const APP_NAME = 'Servly';
-export const APP_SLOGAN = 'Real People. Smart Solutions.';
-export const APP_DESCRIPTION = 'Sri Lanka\'s smart service marketplace connecting customers with trusted service providers.';
+export const APP_SLOGAN = 'From Home Repairs to Legal Advice — Everything on Servly.';
+export const APP_DESCRIPTION = 'Sri Lanka\'s First All-in-One Service Platform — connecting customers with trusted service providers across every industry.';
 
 export const SERVICE_CATEGORIES = [
   {
-    id: 'home-cleaning',
-    name: 'Home Cleaning',
+    id: 'home-services',
+    name: 'Home Services',
     icon: Home,
-    description: 'Professional cleaning services for your home',
-    color: '#2359C8',
-    count: 145
+    emoji: '🏠',
+    description: 'Expert home maintenance and repair professionals at your doorstep',
+    color: '#2563EB',
+    count: 412,
+    subcategories: [
+      { id: 'electricians', name: 'Electricians' },
+      { id: 'plumbers', name: 'Plumbers' },
+      { id: 'cleaning', name: 'Cleaning Services' },
+      { id: 'ac-repair', name: 'AC Repair' },
+      { id: 'carpentry', name: 'Carpentry' },
+      { id: 'painting', name: 'Painting' }
+    ]
   },
   {
-    id: 'plumbing',
-    name: 'Plumbing',
-    icon: Wrench,
-    description: 'Expert plumbing repairs and installations',
-    color: '#3B80E8',
-    count: 89
+    id: 'legal-services',
+    name: 'Legal Services',
+    icon: Scale,
+    emoji: '⚖️',
+    description: 'Professional legal advice, documentation, and representation',
+    color: '#7C3AED',
+    count: 156,
+    subcategories: [
+      { id: 'lawyers', name: 'Lawyers / Attorneys' },
+      { id: 'notary', name: 'Notary Services' },
+      { id: 'doc-verification', name: 'Document Verification' },
+      { id: 'contract-drafting', name: 'Contract Drafting' },
+      { id: 'legal-consultation', name: 'Legal Consultation' }
+    ]
   },
   {
-    id: 'electrical',
-    name: 'Electrical',
-    icon: Zap,
-    description: 'Licensed electrical services and repairs',
-    color: '#1B3561',
-    count: 112
-  },
-  {
-    id: 'painting',
-    name: 'Painting',
-    icon: Paintbrush,
-    description: 'Interior and exterior painting services',
-    color: '#2359C8',
-    count: 67
-  },
-  {
-    id: 'delivery',
-    name: 'Delivery & Logistics',
-    icon: Truck,
-    description: 'Fast and reliable delivery solutions',
-    color: '#3B80E8',
-    count: 203
-  },
-  {
-    id: 'documentation',
-    name: 'Documentation',
-    icon: FileText,
-    description: 'Document processing and insurance support',
-    color: '#1B3561',
-    count: 54
-  },
-  {
-    id: 'photography',
-    name: 'Photography',
-    icon: Camera,
-    description: 'Professional photography and videography',
-    color: '#2359C8',
-    count: 98
-  },
-  {
-    id: 'web-development',
-    name: 'Web Development',
-    icon: Code,
-    description: 'Custom websites and web applications',
-    color: '#3B80E8',
-    count: 176
-  },
-  {
-    id: 'tutoring',
-    name: 'Tutoring',
-    icon: GraduationCap,
-    description: 'Expert tutoring in all subjects',
-    color: '#1B3561',
-    count: 134
-  },
-  {
-    id: 'carpentry',
-    name: 'Carpentry',
-    icon: Hammer,
-    description: 'Custom woodwork and furniture repairs',
-    color: '#2359C8',
-    count: 45
-  },
-  {
-    id: 'healthcare',
-    name: 'Healthcare',
+    id: 'medical-health',
+    name: 'Medical & Health',
     icon: Stethoscope,
-    description: 'Home healthcare and wellness services',
-    color: '#3B80E8',
-    count: 78
+    emoji: '🏥',
+    description: 'Trusted healthcare professionals and medical services',
+    color: '#DC2626',
+    count: 234,
+    subcategories: [
+      { id: 'doctor-consultation', name: 'Doctor Consultation' },
+      { id: 'medical-advisors', name: 'Medical Advisors' },
+      { id: 'home-nursing', name: 'Home Nursing' },
+      { id: 'pharmacy-delivery', name: 'Pharmacy Delivery' },
+      { id: 'lab-testing', name: 'Lab Testing Services' }
+    ]
   },
   {
-    id: 'gardening',
-    name: 'Gardening',
-    icon: Leaf,
-    description: 'Garden maintenance and landscaping',
-    color: '#1B3561',
-    count: 62
+    id: 'therapy-wellness',
+    name: 'Therapy & Wellness',
+    icon: Brain,
+    emoji: '🧠',
+    description: 'Mental health support, fitness, and holistic wellness',
+    color: '#0D9488',
+    count: 178,
+    subcategories: [
+      { id: 'counseling', name: 'Counseling' },
+      { id: 'mental-health', name: 'Mental Health Therapy' },
+      { id: 'fitness-trainers', name: 'Fitness Trainers' },
+      { id: 'yoga', name: 'Yoga Instructors' },
+      { id: 'nutrition', name: 'Nutrition Experts' }
+    ]
+  },
+  {
+    id: 'education',
+    name: 'Education Services',
+    icon: GraduationCap,
+    emoji: '🎓',
+    description: 'Quality tutoring, skill development, and career guidance',
+    color: '#EA580C',
+    count: 298,
+    subcategories: [
+      { id: 'tutoring', name: 'Tutors (School / University)' },
+      { id: 'online-classes', name: 'Online Classes' },
+      { id: 'skill-development', name: 'Skill Development (IT, Language)' },
+      { id: 'career-guidance', name: 'Career Guidance' }
+    ]
+  },
+  {
+    id: 'business-services',
+    name: 'Business Services',
+    icon: Briefcase,
+    emoji: '💼',
+    description: 'Accounting, tax, registration, and professional business support',
+    color: '#1D4ED8',
+    count: 187,
+    subcategories: [
+      { id: 'accounting', name: 'Accounting & Auditing' },
+      { id: 'tax-consultants', name: 'Tax Consultants' },
+      { id: 'business-registration', name: 'Business Registration' },
+      { id: 'marketing-branding', name: 'Marketing & Branding' },
+      { id: 'hr-recruitment', name: 'HR & Recruitment' }
+    ]
+  },
+  {
+    id: 'transport-logistics',
+    name: 'Transport & Logistics',
+    icon: Truck,
+    emoji: '🚚',
+    description: 'Reliable transport, delivery, and moving services',
+    color: '#9333EA',
+    count: 325,
+    subcategories: [
+      { id: 'taxi-hire', name: 'Taxi / Hire Vehicles' },
+      { id: 'delivery-services', name: 'Delivery Services' },
+      { id: 'moving-relocation', name: 'Moving & Relocation' },
+      { id: 'courier', name: 'Courier Services' }
+    ]
+  },
+  {
+    id: 'tourism-travel',
+    name: 'Tourism & Travel',
+    icon: Plane,
+    emoji: '✈️',
+    description: 'Travel planning, tours, bookings, and unique experiences',
+    color: '#0EA5E9',
+    count: 143,
+    subcategories: [
+      { id: 'tour-guides', name: 'Tour Guides' },
+      { id: 'hotel-bookings', name: 'Hotel Bookings' },
+      { id: 'travel-planning', name: 'Travel Planning' },
+      { id: 'vehicle-rental', name: 'Vehicle Rental' },
+      { id: 'experience-packages', name: 'Experience Packages' }
+    ]
+  },
+  {
+    id: 'personal-services',
+    name: 'Personal Services',
+    icon: User,
+    emoji: '👤',
+    description: 'Beauty, photography, events, and personal assistance',
+    color: '#DB2777',
+    count: 267,
+    subcategories: [
+      { id: 'beauty-salon', name: 'Beauty & Salon' },
+      { id: 'photography', name: 'Photography' },
+      { id: 'event-planning', name: 'Event Planning' },
+      { id: 'personal-assistants', name: 'Personal Assistants' },
+      { id: 'home-chefs', name: 'Home Chefs' }
+    ]
+  },
+  {
+    id: 'digital-freelance',
+    name: 'Digital & Freelance',
+    icon: Monitor,
+    emoji: '💻',
+    description: 'Web development, design, content creation, and digital services',
+    color: '#059669',
+    count: 389,
+    subcategories: [
+      { id: 'graphic-design', name: 'Graphic Design' },
+      { id: 'web-development', name: 'Web Development' },
+      { id: 'social-media', name: 'Social Media Management' },
+      { id: 'content-writing', name: 'Content Writing' },
+      { id: 'video-editing', name: 'Video Editing' }
+    ]
+  },
+  {
+    id: 'quick-help',
+    name: 'On-Demand Quick Help',
+    icon: AlertTriangle,
+    emoji: '🔧',
+    description: '"Need help now" — emergency services and last-minute bookings',
+    color: '#E11D48',
+    count: 98,
+    featured: true,
+    subcategories: [
+      { id: 'need-help-now', name: '"Need Help Now" Requests' },
+      { id: 'emergency-services', name: 'Emergency Services' },
+      { id: 'last-minute', name: 'Last-Minute Bookings' }
+    ]
   }
 ];
+
+// Flat list of all subcategories for search/filter
+export const ALL_SUBCATEGORIES = SERVICE_CATEGORIES.flatMap(cat =>
+  cat.subcategories.map(sub => ({
+    ...sub,
+    parentId: cat.id,
+    parentName: cat.name,
+    parentColor: cat.color
+  }))
+);
 
 export const HOW_IT_WORKS_STEPS = [
   {

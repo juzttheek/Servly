@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Search, ArrowRight, CheckCircle, Star, Shield, Zap,
   Users, Clock, MapPin, Play, ChevronRight, Sparkles,
-  TrendingUp, Award, HeartHandshake
+  TrendingUp, Award, HeartHandshake, AlertTriangle
 } from 'lucide-react';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -20,6 +20,7 @@ const Landing = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [counters, setCounters] = useState(STATS.map(() => 0));
   const [statsVisible, setStatsVisible] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
   const statsRef = useRef(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -78,6 +79,9 @@ const Landing = () => {
     })
   };
 
+  // Show first 6 or all categories
+  const visibleCategories = showAllCategories ? SERVICE_CATEGORIES : SERVICE_CATEGORIES.slice(0, 6);
+
   return (
     <div className="landing">
       {/* ===== HERO ===== */}
@@ -98,7 +102,11 @@ const Landing = () => {
           >
             <motion.div variants={fadeUp}>
               <Badge variant="dark" size="lg" dot>
+<<<<<<< HEAD
                 <Sparkles size={14} /> {t('landing.hero_badge')}
+=======
+                <Sparkles size={14} /> Sri Lanka's First All-in-One Service Platform
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
               </Badge>
             </motion.div>
 
@@ -109,7 +117,12 @@ const Landing = () => {
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={fadeUp}>
+<<<<<<< HEAD
               {t('landing.hero_subtitle')}
+=======
+              From home repairs to legal advice — everything on Servly.
+              Connect with verified professionals across {SERVICE_CATEGORIES.length} service categories.
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </motion.p>
 
             <motion.form className="hero-search" variants={fadeUp} onSubmit={handleSearch}>
@@ -127,8 +140,13 @@ const Landing = () => {
                 </Button>
               </div>
               <div className="hero-search-tags">
+<<<<<<< HEAD
                 <span className="hero-search-tags-label">{t('landing.popular')}</span>
                 {['Home Cleaning', 'Plumbing', 'Photography', 'Web Development'].map(tag => (
+=======
+                <span className="hero-search-tags-label">Popular:</span>
+                {['Home Services', 'Legal Advice', 'Quick Help', 'Web Development'].map(tag => (
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                   <Link
                     key={tag}
                     to={`/services?q=${encodeURIComponent(tag)}`}
@@ -182,10 +200,15 @@ const Landing = () => {
                 </div>
               </div>
               <div className="hero-floating-card hero-fc-3">
-                <div className="hero-fc-icon hero-fc-icon-green"><Star size={20} /></div>
+                <div className="hero-fc-icon hero-fc-icon-red"><AlertTriangle size={20} /></div>
                 <div>
+<<<<<<< HEAD
                   <p className="hero-fc-title">{t('landing.avg_rating')}</p>
                   <p className="hero-fc-desc">{t('landing.reviews')}</p>
+=======
+                  <p className="hero-fc-title">Quick Help 🔥</p>
+                  <p className="hero-fc-desc">On-demand services</p>
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                 </div>
               </div>
 
@@ -193,8 +216,13 @@ const Landing = () => {
                 <div className="hero-visual-gradient" />
                 <div className="hero-visual-content">
                   <HeartHandshake size={64} strokeWidth={1.5} />
+<<<<<<< HEAD
                   <h3>{t('landing.smart_marketplace')}</h3>
                   <p>{t('landing.connecting_people')}</p>
+=======
+                  <h3>All-in-One<br/>Service Platform</h3>
+                  <p>{SERVICE_CATEGORIES.length} Categories<br/>One Platform</p>
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                 </div>
               </div>
             </div>
@@ -235,12 +263,16 @@ const Landing = () => {
             <Badge variant="primary" size="lg">{t('landing.categories_badge')}</Badge>
             <h2>{t('landing.categories_title')}</h2>
             <p className="section-desc">
+<<<<<<< HEAD
               {t('landing.categories_desc')}
+=======
+              From home repairs to legal advice — find the right professional for any task across {SERVICE_CATEGORIES.length} service categories.
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </p>
           </motion.div>
 
           <div className="categories-grid">
-            {SERVICE_CATEGORIES.map((cat, i) => {
+            {visibleCategories.map((cat, i) => {
               const IconComponent = cat.icon;
               // Clean key id: e.g. "home-cleaning" -> "home_cleaning"
               const transKey = cat.id.replace(/-/g, '_');
@@ -253,19 +285,54 @@ const Landing = () => {
                   custom={i}
                   variants={fadeUp}
                 >
-                  <Link to={`/services?category=${cat.id}`} className="category-card">
+                  <Link to={`/services?category=${cat.id}`} className={`category-card ${cat.featured ? 'category-card-featured' : ''}`}>
+                    {cat.featured && <div className="category-featured-badge">🔥 Unique Feature</div>}
                     <div className="category-icon" style={{ background: `${cat.color}12`, color: cat.color }}>
                       <IconComponent size={26} />
                     </div>
+<<<<<<< HEAD
                     <h4 className="category-name">{t(`landing.category_${transKey}_name`)}</h4>
                     <p className="category-desc">{t(`landing.category_${transKey}_desc`)}</p>
                     <span className="category-count">{cat.count} {t('landing.providers_count')}</span>
+=======
+                    <h4 className="category-name">{cat.emoji} {cat.name}</h4>
+                    <p className="category-desc">{cat.description}</p>
+                    <div className="category-subcategories">
+                      {cat.subcategories.slice(0, 3).map(sub => (
+                        <span key={sub.id} className="category-sub-tag">{sub.name}</span>
+                      ))}
+                      {cat.subcategories.length > 3 && (
+                        <span className="category-sub-more">+{cat.subcategories.length - 3} more</span>
+                      )}
+                    </div>
+                    <span className="category-count">{cat.count} providers</span>
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
                     <div className="category-arrow"><ChevronRight size={18} /></div>
                   </Link>
                 </motion.div>
               );
             })}
           </div>
+
+          {SERVICE_CATEGORIES.length > 6 && (
+            <motion.div
+              className="categories-toggle"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => setShowAllCategories(!showAllCategories)}
+                icon={showAllCategories ? null : ArrowRight}
+                iconPosition="right"
+              >
+                {showAllCategories ? 'Show Less' : `View All ${SERVICE_CATEGORIES.length} Categories`}
+              </Button>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -325,7 +392,11 @@ const Landing = () => {
                 {t('landing.why_title')}
               </motion.h2>
               <motion.p className="why-desc" variants={fadeUp}>
+<<<<<<< HEAD
                 {t('landing.why_desc')}
+=======
+                We combine technology with human expertise to give you the best experience in finding and booking services across all {SERVICE_CATEGORIES.length} categories.
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
               </motion.p>
 
               <div className="why-features">
@@ -457,7 +528,12 @@ const Landing = () => {
               {t('landing.cta_title')}
             </motion.h2>
             <motion.p variants={fadeUp}>
+<<<<<<< HEAD
               {t('landing.cta_desc')}
+=======
+              Join thousands of customers and service providers on Sri Lanka's first all-in-one service platform.
+              From home repairs to legal advice — everything on Servly.
+>>>>>>> a62371fd4c8c7aca1583c910f65e8f296143bd49
             </motion.p>
             <motion.div className="cta-buttons" variants={fadeUp}>
               <Link to="/register">
