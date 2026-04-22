@@ -10,6 +10,7 @@
   --color-deep-navy: #1B3561;
   --color-brand-blue: #2359C8;
   --color-sky-blue: #3B80E8;
+  --color-brand-green: #0DB87A;
 
   /* Supporting UI Colors */
   --color-white: #FFFFFF;
@@ -31,6 +32,8 @@
   /* Gradients */
   --gradient-brand: linear-gradient(135deg, #1B3561 0%, #2359C8 50%, #3B80E8 100%);
   --gradient-brand-horizontal: linear-gradient(90deg, #2359C8 0%, #3B80E8 100%);
+  --gradient-brand-green: linear-gradient(135deg, #0D8559 0%, #0DB87A 50%, #22D3AA 100%);
+  --gradient-brand-green-horizontal: linear-gradient(90deg, #0DB87A 0%, #22D3AA 100%);
   --gradient-hero: linear-gradient(160deg, #0f2240 0%, #1B3561 30%, #2359C8 70%, #3B80E8 100%);
   --gradient-card: linear-gradient(135deg, rgba(35, 89, 200, 0.05) 0%, rgba(59, 128, 232, 0.08) 100%);
   --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);

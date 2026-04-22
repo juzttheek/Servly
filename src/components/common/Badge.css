@@ -18,8 +18,8 @@
 }
 
 .badge-primary {
-  background: rgba(35, 89, 200, 0.1);
-  color: var(--color-brand-blue);
+  background: rgba(13, 184, 122, 0.1);
+  color: var(--color-brand-green);
 }
 
 .badge-success {

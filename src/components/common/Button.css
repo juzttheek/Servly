@@ -34,13 +34,13 @@
 
 /* --- Variants --- */
 .btn-primary {
-  background: var(--gradient-brand-horizontal);
+  background: var(--gradient-brand-green-horizontal);
   color: var(--color-white);
-  box-shadow: var(--shadow-brand);
+  box-shadow: 0 4px 24px rgba(13, 184, 122, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
-  box-shadow: var(--shadow-brand-lg);
+  box-shadow: 0 8px 40px rgba(13, 184, 122, 0.4);
   transform: translateY(-2px);
 }
 
