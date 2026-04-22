@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, Bell, MessageSquare, LogOut, User, Settings, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { Menu, X, Search, Bell, MessageSquare, LogOut, User, Settings, LayoutDashboard, ChevronDown, Globe } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { logout } from '../../firebase/auth';
 import Avatar from '../common/Avatar';
 import Button from '../common/Button';
@@ -11,7 +12,9 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const { currentUser, userProfile, isAuthenticated } = useAuth();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -27,6 +30,7 @@ const Navbar = () => {
   useEffect(() => {
     setMobileOpen(false);
     setProfileOpen(false);
+    setLangOpen(false);
   }, [location]);
 
   const handleLogout = async () => {
@@ -39,10 +43,10 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { path: '/services', label: 'Browse Services' },
-    { path: '/post-request', label: 'Post Request' },
+    { path: '/services', label: t('navbar.browse_services') },
+    { path: '/post-request', label: t('navbar.post_request') },
     ...(isAuthenticated ? [
-      { path: '/chat', label: 'Messages' },
+      { path: '/chat', label: t('navbar.messages') },
     ] : [])
   ];
 
@@ -71,6 +75,36 @@ const Navbar = () => {
 
           {/* Right Section */}
           <div className="navbar-right">
+            
+            {/* Language Selector */}
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <div 
+                onClick={() => {
+                  setLangOpen(!langOpen);
+                  setProfileOpen(false);
+                }}
+                className="navbar-link"
+                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '6px', padding: '8px 12px' }}
+              >
+                <Globe size={18} />
+                <span className="hide-mobile" style={{ fontSize: '14px', fontWeight: 600 }}>
+                  {i18n.language.toUpperCase().substring(0, 2)}
+                </span>
+                <ChevronDown size={14} className={langOpen ? 'rotated' : ''} />
+              </div>
+              
+              {langOpen && (
+                <>
+                  <div className="navbar-dropdown-backdrop" onClick={() => setLangOpen(false)} />
+                  <div className="navbar-dropdown" style={{ top: '100%', right: 0, marginTop: '0.5rem', minWidth: '140px' }}>
+                     <button className="navbar-dropdown-item" onClick={() => { i18n.changeLanguage('en'); setLangOpen(false); }}>English</button>
+                     <button className="navbar-dropdown-item" onClick={() => { i18n.changeLanguage('si'); setLangOpen(false); }}>සිංහල (Sinhala)</button>
+                     <button className="navbar-dropdown-item" onClick={() => { i18n.changeLanguage('ta'); setLangOpen(false); }}>தமிழ் (Tamil)</button>
+                  </div>
+                </>
+              )}
+            </div>
+
             {isAuthenticated ? (
               <>
                 <button className="navbar-icon-btn hide-mobile" title="Notifications">
@@ -78,7 +112,10 @@ const Navbar = () => {
                   <span className="navbar-notification-dot" />
                 </button>
                 
-                <div className="navbar-profile" onClick={() => setProfileOpen(!profileOpen)}>
+                <div className="navbar-profile" onClick={() => {
+                  setProfileOpen(!profileOpen);
+                  setLangOpen(false);
+                }}>
                   <Avatar
                     src={currentUser?.photoURL}
                     name={currentUser?.displayName || 'User'}
@@ -109,24 +146,24 @@ const Navbar = () => {
                       <div className="navbar-dropdown-divider" />
                       <Link to="/dashboard" className="navbar-dropdown-item">
                         <LayoutDashboard size={18} />
-                        Dashboard
+                        {t('navbar.dashboard')}
                       </Link>
                       <Link to={`/provider/${currentUser?.uid}`} className="navbar-dropdown-item">
                         <User size={18} />
-                        My Profile
+                        {t('navbar.my_profile')}
                       </Link>
                       <Link to="/chat" className="navbar-dropdown-item">
                         <MessageSquare size={18} />
-                        Messages
+                        {t('navbar.messages')}
                       </Link>
                       <Link to="/settings" className="navbar-dropdown-item">
                         <Settings size={18} />
-                        Settings
+                        {t('navbar.settings')}
                       </Link>
                       <div className="navbar-dropdown-divider" />
                       <button className="navbar-dropdown-item navbar-dropdown-logout" onClick={handleLogout}>
                         <LogOut size={18} />
-                        Logout
+                        {t('navbar.logout')}
                       </button>
                     </div>
                   </>
@@ -135,10 +172,10 @@ const Navbar = () => {
             ) : (
               <div className="navbar-auth-btns">
                 <Link to="/login">
-                  <Button variant={isTransparent ? 'outline' : 'ghost'} size="sm">Log In</Button>
+                  <Button variant={isTransparent ? 'outline' : 'ghost'} size="sm">{t('navbar.login')}</Button>
                 </Link>
                 <Link to="/register">
-                  <Button variant="primary" size="sm">Get Started</Button>
+                  <Button variant="primary" size="sm">{t('navbar.get_started')}</Button>
                 </Link>
               </div>
             )}
@@ -168,19 +205,19 @@ const Navbar = () => {
               ))}
               {isAuthenticated ? (
                 <>
-                  <Link to="/dashboard" className="mobile-menu-link">Dashboard</Link>
-                  <Link to="/settings" className="mobile-menu-link">Settings</Link>
+                  <Link to="/dashboard" className="mobile-menu-link">{t('navbar.dashboard')}</Link>
+                  <Link to="/settings" className="mobile-menu-link">{t('navbar.settings')}</Link>
                   <button className="mobile-menu-link mobile-menu-logout" onClick={handleLogout}>
-                    <LogOut size={18} /> Logout
+                    <LogOut size={18} /> {t('navbar.logout')}
                   </button>
                 </>
               ) : (
                 <div className="mobile-menu-auth">
                   <Link to="/login">
-                    <Button variant="secondary" fullWidth>Log In</Button>
+                    <Button variant="secondary" fullWidth>{t('navbar.login')}</Button>
                   </Link>
                   <Link to="/register">
-                    <Button variant="primary" fullWidth>Get Started</Button>
+                    <Button variant="primary" fullWidth>{t('navbar.get_started')}</Button>
                   </Link>
                 </div>
               )}
