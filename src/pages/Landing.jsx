@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import {
   Search, ArrowRight, CheckCircle, Star, Shield, Zap,
   Users, Clock, MapPin, Play, ChevronRight, Sparkles,
-  TrendingUp, Award, HeartHandshake
+  TrendingUp, Award, HeartHandshake, AlertTriangle
 } from 'lucide-react';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -19,6 +19,7 @@ const Landing = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [counters, setCounters] = useState(STATS.map(() => 0));
   const [statsVisible, setStatsVisible] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
   const statsRef = useRef(null);
   const navigate = useNavigate();
 
@@ -76,6 +77,9 @@ const Landing = () => {
     })
   };
 
+  // Show first 6 or all categories
+  const visibleCategories = showAllCategories ? SERVICE_CATEGORIES : SERVICE_CATEGORIES.slice(0, 6);
+
   return (
     <div className="landing">
       {/* ===== HERO ===== */}
@@ -96,7 +100,7 @@ const Landing = () => {
           >
             <motion.div variants={fadeUp}>
               <Badge variant="dark" size="lg" dot>
-                <Sparkles size={14} /> Sri Lanka's #1 Service Marketplace
+                <Sparkles size={14} /> Sri Lanka's First All-in-One Service Platform
               </Badge>
             </motion.div>
 
@@ -107,8 +111,8 @@ const Landing = () => {
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={fadeUp}>
-              Connect with verified professionals for home services, freelance work,
-              deliveries, and more. Fast, reliable, and all in one place.
+              From home repairs to legal advice — everything on Servly.
+              Connect with verified professionals across {SERVICE_CATEGORIES.length} service categories.
             </motion.p>
 
             <motion.form className="hero-search" variants={fadeUp} onSubmit={handleSearch}>
@@ -127,7 +131,7 @@ const Landing = () => {
               </div>
               <div className="hero-search-tags">
                 <span className="hero-search-tags-label">Popular:</span>
-                {['Home Cleaning', 'Plumbing', 'Photography', 'Web Development'].map(tag => (
+                {['Home Services', 'Legal Advice', 'Quick Help', 'Web Development'].map(tag => (
                   <Link
                     key={tag}
                     to={`/services?q=${encodeURIComponent(tag)}`}
@@ -181,10 +185,10 @@ const Landing = () => {
                 </div>
               </div>
               <div className="hero-floating-card hero-fc-3">
-                <div className="hero-fc-icon hero-fc-icon-green"><Star size={20} /></div>
+                <div className="hero-fc-icon hero-fc-icon-red"><AlertTriangle size={20} /></div>
                 <div>
-                  <p className="hero-fc-title">4.9★ Average</p>
-                  <p className="hero-fc-desc">15,000+ reviews</p>
+                  <p className="hero-fc-title">Quick Help 🔥</p>
+                  <p className="hero-fc-desc">On-demand services</p>
                 </div>
               </div>
 
@@ -192,8 +196,8 @@ const Landing = () => {
                 <div className="hero-visual-gradient" />
                 <div className="hero-visual-content">
                   <HeartHandshake size={64} strokeWidth={1.5} />
-                  <h3>Smart Service<br/>Marketplace</h3>
-                  <p>Connecting people<br/>with trusted experts</p>
+                  <h3>All-in-One<br/>Service Platform</h3>
+                  <p>{SERVICE_CATEGORIES.length} Categories<br/>One Platform</p>
                 </div>
               </div>
             </div>
@@ -234,12 +238,12 @@ const Landing = () => {
             <Badge variant="primary" size="lg">Services</Badge>
             <h2>Explore Our Categories</h2>
             <p className="section-desc">
-              From home maintenance to creative freelance work — find the right professional for any task.
+              From home repairs to legal advice — find the right professional for any task across {SERVICE_CATEGORIES.length} service categories.
             </p>
           </motion.div>
 
           <div className="categories-grid">
-            {SERVICE_CATEGORIES.map((cat, i) => {
+            {visibleCategories.map((cat, i) => {
               const IconComponent = cat.icon;
               return (
                 <motion.div
@@ -250,12 +254,21 @@ const Landing = () => {
                   custom={i}
                   variants={fadeUp}
                 >
-                  <Link to={`/services?category=${cat.id}`} className="category-card">
+                  <Link to={`/services?category=${cat.id}`} className={`category-card ${cat.featured ? 'category-card-featured' : ''}`}>
+                    {cat.featured && <div className="category-featured-badge">🔥 Unique Feature</div>}
                     <div className="category-icon" style={{ background: `${cat.color}12`, color: cat.color }}>
                       <IconComponent size={26} />
                     </div>
-                    <h4 className="category-name">{cat.name}</h4>
+                    <h4 className="category-name">{cat.emoji} {cat.name}</h4>
                     <p className="category-desc">{cat.description}</p>
+                    <div className="category-subcategories">
+                      {cat.subcategories.slice(0, 3).map(sub => (
+                        <span key={sub.id} className="category-sub-tag">{sub.name}</span>
+                      ))}
+                      {cat.subcategories.length > 3 && (
+                        <span className="category-sub-more">+{cat.subcategories.length - 3} more</span>
+                      )}
+                    </div>
                     <span className="category-count">{cat.count} providers</span>
                     <div className="category-arrow"><ChevronRight size={18} /></div>
                   </Link>
@@ -263,6 +276,26 @@ const Landing = () => {
               );
             })}
           </div>
+
+          {SERVICE_CATEGORIES.length > 6 && (
+            <motion.div
+              className="categories-toggle"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => setShowAllCategories(!showAllCategories)}
+                icon={showAllCategories ? null : ArrowRight}
+                iconPosition="right"
+              >
+                {showAllCategories ? 'Show Less' : `View All ${SERVICE_CATEGORIES.length} Categories`}
+              </Button>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -322,7 +355,7 @@ const Landing = () => {
                 The Smarter Way to Find Services
               </motion.h2>
               <motion.p className="why-desc" variants={fadeUp}>
-                We combine technology with human expertise to give you the best experience in finding and booking services.
+                We combine technology with human expertise to give you the best experience in finding and booking services across all {SERVICE_CATEGORIES.length} categories.
               </motion.p>
 
               <div className="why-features">
@@ -454,8 +487,8 @@ const Landing = () => {
               Ready to Get Started?
             </motion.h2>
             <motion.p variants={fadeUp}>
-              Join thousands of customers and service providers on Servly.
-              Whether you need a service or want to offer one — we've got you covered.
+              Join thousands of customers and service providers on Sri Lanka's first all-in-one service platform.
+              From home repairs to legal advice — everything on Servly.
             </motion.p>
             <motion.div className="cta-buttons" variants={fadeUp}>
               <Link to="/register">

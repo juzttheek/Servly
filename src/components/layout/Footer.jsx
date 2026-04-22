@@ -17,9 +17,9 @@ const Footer = () => {
                 <span className="footer-logo-text">Servly</span>
               </Link>
               <p className="footer-brand-desc">
-                Sri Lanka's smart service marketplace. Connecting you with trusted, verified service providers.
+                Sri Lanka's first all-in-one service platform. From home repairs to legal advice — everything on Servly.
               </p>
-              <p className="footer-slogan">Real People. Smart Solutions.</p>
+              <p className="footer-slogan">From Home Repairs to Legal Advice — Everything on Servly.</p>
               <div className="footer-socials">
                 <a href="#" className="footer-social" aria-label="Facebook">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -49,13 +49,14 @@ const Footer = () => {
 
             {/* Services */}
             <div className="footer-col">
-              <h4 className="footer-col-title">Services</h4>
+              <h4 className="footer-col-title">Top Categories</h4>
               <ul className="footer-links">
-                <li><Link to="/services?category=home-cleaning">Home Cleaning</Link></li>
-                <li><Link to="/services?category=plumbing">Plumbing</Link></li>
-                <li><Link to="/services?category=electrical">Electrical</Link></li>
-                <li><Link to="/services?category=delivery">Delivery</Link></li>
-                <li><Link to="/services?category=photography">Photography</Link></li>
+                <li><Link to="/services?category=home-services">🏠 Home Services</Link></li>
+                <li><Link to="/services?category=legal-services">⚖️ Legal Services</Link></li>
+                <li><Link to="/services?category=transport-logistics">🚚 Transport & Logistics</Link></li>
+                <li><Link to="/services?category=business-services">💼 Business Services</Link></li>
+                <li><Link to="/services?category=digital-freelance">💻 Digital & Freelance</Link></li>
+                <li><Link to="/services?category=quick-help">🔧 Quick Help</Link></li>
               </ul>
             </div>
 

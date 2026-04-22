@@ -21,12 +21,21 @@
 .post-step-desc { color: var(--color-muted-blue-gray); margin-bottom: var(--space-6); }
 
 /* Categories */
-.post-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+.post-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
 .post-category { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-5); border: 2px solid var(--color-border-blue-gray); border-radius: var(--radius-xl); background: none; cursor: pointer; transition: all var(--transition-base); }
 .post-category:hover { border-color: var(--color-brand-blue); transform: translateY(-2px); }
 .post-category.active { border-color: var(--color-brand-blue); background: rgba(35,89,200,0.04); box-shadow: var(--shadow-brand); }
+.post-category-featured.active { border-color: #E11D48; background: rgba(225,29,72,0.04); box-shadow: 0 0 0 4px rgba(225,29,72,0.1); }
 .post-category-icon { width: 52px; height: 52px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; }
 .post-category span { font-family: var(--font-heading); font-weight: 600; font-size: var(--text-xs); color: var(--color-heading); text-align: center; }
+
+/* Subcategory selection */
+.post-subcategories { margin-top: var(--space-6); }
+.post-subcategories h4 { font-size: var(--text-sm); font-weight: 600; color: var(--color-muted-blue-gray); margin-bottom: var(--space-3); }
+.post-subcategory-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.post-subcategory { padding: 8px 16px; border: 1px solid var(--color-border-blue-gray); border-radius: var(--radius-full); background: var(--color-white); font-size: var(--text-sm); font-weight: 500; color: var(--color-body); cursor: pointer; transition: all var(--transition-fast); }
+.post-subcategory:hover { border-color: var(--color-brand-blue); color: var(--color-brand-blue); }
+.post-subcategory.active { background: var(--color-brand-blue); color: var(--color-white); border-color: var(--color-brand-blue); }
 
 /* Form */
 .post-form { display: flex; flex-direction: column; gap: var(--space-5); }

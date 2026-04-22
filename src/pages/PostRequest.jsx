@@ -14,6 +14,7 @@ const PostRequest = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     category: '',
+    subcategory: '',
     title: '',
     description: '',
     budget: '',
@@ -23,6 +24,10 @@ const PostRequest = () => {
 
   const updateField = (field, value) => setFormData(prev => ({ ...prev, [field]: value }));
   const totalSteps = 4;
+
+  // Get selected category object
+  const selectedCategoryObj = SERVICE_CATEGORIES.find(c => c.id === formData.category);
+
   const canNext = () => {
     if (step === 1) return !!formData.category;
     if (step === 2) return formData.title && formData.description;
@@ -80,17 +85,48 @@ const PostRequest = () => {
                   return (
                     <button
                       key={cat.id}
-                      className={`post-category ${formData.category === cat.id ? 'active' : ''}`}
-                      onClick={() => updateField('category', cat.id)}
+                      className={`post-category ${formData.category === cat.id ? 'active' : ''} ${cat.featured ? 'post-category-featured' : ''}`}
+                      onClick={() => {
+                        updateField('category', cat.id);
+                        updateField('subcategory', '');
+                      }}
                     >
                       <div className="post-category-icon" style={{ color: cat.color, background: `${cat.color}12` }}>
                         <Icon size={24} />
                       </div>
-                      <span>{cat.name}</span>
+                      <span>{cat.emoji} {cat.name}</span>
                     </button>
                   );
                 })}
               </div>
+
+              {/* Subcategory selection when a category is picked */}
+              {selectedCategoryObj && (
+                <motion.div
+                  className="post-subcategories"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <h4>Select a specific service (optional)</h4>
+                  <div className="post-subcategory-list">
+                    <button
+                      className={`post-subcategory ${!formData.subcategory ? 'active' : ''}`}
+                      onClick={() => updateField('subcategory', '')}
+                    >
+                      All {selectedCategoryObj.name}
+                    </button>
+                    {selectedCategoryObj.subcategories.map(sub => (
+                      <button
+                        key={sub.id}
+                        className={`post-subcategory ${formData.subcategory === sub.id ? 'active' : ''}`}
+                        onClick={() => updateField('subcategory', sub.id)}
+                      >
+                        {sub.name}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
           )}
 
@@ -147,8 +183,18 @@ const PostRequest = () => {
               <div className="post-review">
                 <div className="post-review-item">
                   <span className="post-review-label">Category</span>
-                  <span className="post-review-value">{SERVICE_CATEGORIES.find(c => c.id === formData.category)?.name || '—'}</span>
+                  <span className="post-review-value">
+                    {selectedCategoryObj ? `${selectedCategoryObj.emoji} ${selectedCategoryObj.name}` : '—'}
+                  </span>
                 </div>
+                {formData.subcategory && (
+                  <div className="post-review-item">
+                    <span className="post-review-label">Sub-service</span>
+                    <span className="post-review-value">
+                      {selectedCategoryObj?.subcategories.find(s => s.id === formData.subcategory)?.name || '—'}
+                    </span>
+                  </div>
+                )}
                 <div className="post-review-item">
                   <span className="post-review-label">Title</span>
                   <span className="post-review-value">{formData.title || '—'}</span>
