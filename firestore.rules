@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===== ADMIN RULES =====
+    // Allow admins to read/write their own admin document
+    match /admins/{adminUID} {
+      allow read, write: if request.auth.uid == adminUID;
+      allow read: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== AUTHENTICATION RULES =====
+    // Allow reading own auth document for login verification
+    match /auth/{authUID} {
+      allow read: if request.auth.uid == authUID;
+      allow write: if request.auth.uid == authUID;
+    }
+
+    // ===== USERS RULES =====
+    // Users can read own document, write own document
+    // Admins can read all users
+    match /users/{userUID} {
+      allow read: if request.auth.uid == userUID;
+      allow read: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if request.auth.uid == userUID;
+      allow write: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== JOBS RULES =====
+    // Anyone authenticated can read jobs
+    // Admin can manage jobs
+    // Users can create jobs
+    match /jobs/{jobID} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth.uid == resource.data.postedBy || exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== JOB REQUESTS RULES =====
+    // Authenticated users can read requests
+    // Admin can manage all requests
+    match /job_requests/{requestID} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth.uid == resource.data.requestedBy || exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== PAYMENTS RULES =====
+    // Users can read own payments
+    // Admin can read all payments
+    match /payments/{paymentID} {
+      allow read: if request.auth.uid == resource.data.fromUser || request.auth.uid == resource.data.toUser || exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== AUDIT LOGS RULES =====
+    // Only admins can read audit logs
+    match /audit_logs/{logID} {
+      allow read: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ===== DEFAULT DENY =====
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

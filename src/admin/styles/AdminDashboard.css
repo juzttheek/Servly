@@ -1,0 +1,126 @@
+/* ============================================
+   ADMIN — Admin Dashboard Styles
+   ============================================ */
+
+@import '../../styles/index.css';
+
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* Page Header */
+.admin-dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.admin-dashboard-header h1 {
+  margin: 0;
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  color: var(--color-heading);
+}
+
+.admin-dashboard-header p {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--color-muted-blue-gray);
+}
+
+/* Error State */
+.admin-dashboard-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 4px solid var(--color-error);
+  border-radius: var(--radius-lg);
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+/* Stats Grid */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+/* Dashboard Section */
+.admin-dashboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.admin-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.admin-section-header h2 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.admin-section-header p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+}
+
+/* Dashboard Card */
+.admin-dashboard-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-card-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border-blue-gray);
+  background: var(--color-page-gray);
+}
+
+.admin-card-header h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    gap: var(--space-6);
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .admin-dashboard-header p {
+    font-size: var(--text-base);
+  }
+}

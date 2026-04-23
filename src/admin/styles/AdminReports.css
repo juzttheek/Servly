@@ -1,0 +1,207 @@
+/* ============================================
+   ADMIN — Reports & Analytics Styles
+   ============================================ */
+
+@import '../../styles/index.css';
+
+.admin-reports {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-5);
+}
+
+.admin-reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.admin-report-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-report-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-brand-blue);
+}
+
+.report-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border-blue-gray);
+  background: var(--color-page-gray);
+}
+
+.report-header h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+}
+
+.report-content {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-blue-gray);
+}
+
+.metric:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  font-weight: 500;
+}
+
+.metric-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.metric-value.green {
+  color: var(--color-success);
+}
+
+.metric-value.warning {
+  color: var(--color-warning);
+}
+
+/* Detailed Stats */
+.admin-detailed-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.admin-detailed-stats h2 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+}
+
+.stats-table {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.stats-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--color-border-blue-gray);
+}
+
+.stats-table-row:last-child {
+  border-bottom: none;
+}
+
+.stats-table-row:first-child {
+  background: var(--color-page-gray);
+  font-weight: 700;
+  color: var(--color-body);
+}
+
+.stats-table-cell {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-body);
+  display: flex;
+  align-items: center;
+}
+
+.stats-table-row:first-child .stats-table-cell {
+  font-weight: 700;
+  color: var(--color-body);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.trend-up {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.trend-down {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.admin-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-20) var(--space-8);
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--color-border-blue-gray);
+  color: var(--color-muted-blue-gray);
+  text-align: center;
+}
+
+.admin-error-state h2 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+}
+
+.admin-error-state p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 1024px) {
+  .admin-reports-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-reports-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-table-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-table-row:nth-child(odd) .stats-table-cell:last-child {
+    display: none;
+  }
+}

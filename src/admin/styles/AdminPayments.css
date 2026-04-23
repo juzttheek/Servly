@@ -1,0 +1,184 @@
+/* ============================================
+   ADMIN — Payments Management Styles
+   ============================================ */
+
+@import '../../styles/index.css';
+
+.admin-payments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.admin-payment-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-5);
+}
+
+.stat-box {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-box:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-brand-blue);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  color: var(--color-brand-green);
+}
+
+.stat-count {
+  font-size: var(--text-xs);
+  color: var(--color-body);
+}
+
+.admin-payments-controls {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-payments-controls .admin-search-box {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-lg);
+  color: var(--color-muted-blue-gray);
+  transition: border-color var(--transition-fast);
+}
+
+.admin-payments-controls .admin-search-box:focus-within {
+  border-color: var(--color-brand-green);
+}
+
+.admin-payments-controls .admin-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--text-sm);
+  color: var(--color-heading);
+  font-family: var(--font-body);
+}
+
+.admin-payments-controls .admin-search-box input::placeholder {
+  color: var(--color-muted-blue-gray);
+}
+
+.admin-table-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Payment Details Modal */
+.admin-payment-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-group label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-group p {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--color-heading);
+}
+
+.detail-amount {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-brand-green);
+}
+
+.detail-code {
+  font-family: 'Courier New', monospace;
+  background: var(--color-page-gray);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  word-break: break-all;
+  font-size: 12px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.detail-group input {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-heading);
+  transition: border-color var(--transition-fast);
+}
+
+.detail-group input:focus {
+  outline: none;
+  border-color: var(--color-brand-green);
+}
+
+.detail-group input::placeholder {
+  color: var(--color-muted-blue-gray);
+}
+
+@media (max-width: 768px) {
+  .admin-payment-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-payments-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .detail-row {
+    grid-template-columns: 1fr;
+  }
+}

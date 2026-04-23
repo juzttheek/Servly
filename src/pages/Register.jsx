@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, AlertCircle, Briefcase, UserCheck } from 'lucide-react';
 import { registerWithEmail, loginWithGoogle } from '../firebase/auth';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import './Auth.css';
@@ -17,6 +18,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const updateField = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -29,15 +31,15 @@ const Register = () => {
     const { name, email, password, confirmPassword, role } = formData;
     
     if (!name || !email || !password || !confirmPassword) {
-      setError('Please fill in all fields.');
+      setError(t('register.err_fill_all'));
       return;
     }
     if (password.length < 6) {
-      setError('Password must be at least 6 characters.');
+      setError(t('register.err_pwd_length'));
       return;
     }
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError(t('register.err_pwd_match'));
       return;
     }
 
@@ -48,13 +50,13 @@ const Register = () => {
     } catch (err) {
       console.error('Registration error:', err.code, err.message, err);
       if (err.code === 'auth/email-already-in-use') {
-        setError('This email is already registered.');
+        setError(t('register.err_email_in_use'));
       } else if (err.code === 'auth/invalid-api-key') {
-        setError('Invalid Firebase API key. Check your config.');
+        setError(t('register.err_invalid_key'));
       } else if (err.code === 'auth/network-request-failed') {
-        setError('Network error. Check your connection.');
+        setError(t('register.err_network'));
       } else {
-        setError(`Registration failed: ${err.code || err.message}`);
+        setError(`${t('register.err_generic')}${err.code || err.message}`);
       }
     } finally {
       setLoading(false);
@@ -67,7 +69,7 @@ const Register = () => {
       await loginWithGoogle();
       navigate('/dashboard');
     } catch (err) {
-      setError('Google sign-in failed. Please try again.');
+      setError(t('register.err_google'));
     }
   };
 
@@ -81,12 +83,12 @@ const Register = () => {
               <div className="auth-logo-icon">S</div>
               <span>Servly</span>
             </Link>
-            <h2>Join Servly</h2>
-            <p>Create your account and start finding or offering services in minutes.</p>
+            <h2>{t('register.title')}</h2>
+            <p>{t('register.subtitle')}</p>
             <div className="auth-left-features">
-              <div className="auth-feature"><span className="auth-feature-dot" />Free to join</div>
-              <div className="auth-feature"><span className="auth-feature-dot" />Access verified providers</div>
-              <div className="auth-feature"><span className="auth-feature-dot" />Secure platform</div>
+              <div className="auth-feature"><span className="auth-feature-dot" />{t('register.free_join')}</div>
+              <div className="auth-feature"><span className="auth-feature-dot" />{t('register.verified_providers')}</div>
+              <div className="auth-feature"><span className="auth-feature-dot" />{t('register.secure_platform')}</div>
             </div>
           </div>
         </div>
@@ -95,8 +97,8 @@ const Register = () => {
       <div className="auth-right">
         <div className="auth-form-container">
           <div className="auth-form-header">
-            <h1>Create Account</h1>
-            <p>Fill in your details to get started</p>
+            <h1>{t('register.form_title')}</h1>
+            <p>{t('register.form_subtitle')}</p>
           </div>
 
           {error && (
@@ -114,7 +116,7 @@ const Register = () => {
               onClick={() => updateField('role', 'customer')}
             >
               <UserCheck size={20} />
-              <span>I need services</span>
+              <span>{t('register.need_services')}</span>
             </button>
             <button
               className={`auth-role-btn ${formData.role === 'provider' ? 'active' : ''}`}
@@ -122,53 +124,53 @@ const Register = () => {
               onClick={() => updateField('role', 'provider')}
             >
               <Briefcase size={20} />
-              <span>I offer services</span>
+              <span>{t('register.offer_services')}</span>
             </button>
           </div>
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <Input
-              label="Full Name"
+              label={t('register.fullname_label')}
               type="text"
               icon={User}
-              placeholder="John Doe"
+              placeholder={t('register.fullname_placeholder')}
               value={formData.name}
               onChange={(e) => updateField('name', e.target.value)}
             />
             <Input
-              label="Email Address"
+              label={t('register.email_label')}
               type="email"
               icon={Mail}
-              placeholder="you@example.com"
+              placeholder={t('register.email_placeholder')}
               value={formData.email}
               onChange={(e) => updateField('email', e.target.value)}
             />
             <div className="auth-form-row">
               <Input
-                label="Password"
+                label={t('register.password_label')}
                 type="password"
                 icon={Lock}
-                placeholder="Min 6 characters"
+                placeholder={t('register.password_placeholder')}
                 value={formData.password}
                 onChange={(e) => updateField('password', e.target.value)}
               />
               <Input
-                label="Confirm Password"
+                label={t('register.confirm_password_label')}
                 type="password"
                 icon={Lock}
-                placeholder="Re-enter password"
+                placeholder={t('register.confirm_password_placeholder')}
                 value={formData.confirmPassword}
                 onChange={(e) => updateField('confirmPassword', e.target.value)}
               />
             </div>
 
             <Button type="submit" variant="primary" size="lg" fullWidth loading={loading} icon={ArrowRight} iconPosition="right">
-              Create Account
+              {t('register.create_btn')}
             </Button>
           </form>
 
           <div className="auth-divider">
-            <span>or continue with</span>
+            <span>{t('register.or_continue_with')}</span>
           </div>
 
           <button className="auth-google-btn" onClick={handleGoogle}>
@@ -178,11 +180,11 @@ const Register = () => {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
-            Continue with Google
+            {t('register.continue_google')}
           </button>
 
           <p className="auth-switch">
-            Already have an account? <Link to="/login">Log in</Link>
+            {t('register.already_have_account')} <Link to="/login">{t('register.log_in')}</Link>
           </p>
         </div>
       </div>

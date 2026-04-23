@@ -1,0 +1,105 @@
+/* ============================================
+   ADMIN — Stat Card Styles
+   ============================================ */
+
+@import '../../styles/index.css';
+
+.stat-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-blue-gray);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  transition: all var(--transition-base);
+  position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-brand-blue);
+}
+
+.stat-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: rgba(13, 184, 122, 0.08);
+  color: var(--color-brand-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: var(--text-2xl);
+}
+
+.stat-card-default .stat-card-icon {
+  background: rgba(13, 184, 122, 0.08);
+  color: var(--color-brand-green);
+}
+
+.stat-card-blue .stat-card-icon {
+  background: rgba(35, 89, 200, 0.08);
+  color: var(--color-brand-blue);
+}
+
+.stat-card-warning .stat-card-icon {
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--color-warning);
+}
+
+.stat-card-error .stat-card-icon {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--color-error);
+}
+
+.stat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.stat-card-label {
+  font-size: var(--text-sm);
+  color: var(--color-muted-blue-gray);
+  font-weight: 500;
+  margin: 0;
+}
+
+.stat-card-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.stat-card-badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.stat-card-badge.badge-success {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--color-success);
+}
+
+.stat-card-badge.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+}
+
+.stat-card-badge.badge-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-error);
+}
